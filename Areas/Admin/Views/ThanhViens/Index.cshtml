@@ -1,0 +1,113 @@
+﻿@model IEnumerable<ClubPortalMS.ViewModel.ThanhVien.ThanhViensViewModel>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+<div class="content-wrapper">
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class="m-0">Thành Viên</h1>
+                </div><!-- /.col -->
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="#">Trang chủ</a></li>
+                        <li class="breadcrumb-item active">Thành Viên</li>
+                    </ol>
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
+    </div>
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="row">
+                                <div class="col-sm-9">
+                                    <h3 class="card-title">Quản lý Thành Viên</h3>
+                                </div>
+                                <div class="col-sm-3">
+                                    <a class="btn btn-info btn-block btn-flat" style="border-radius: 4px;" type="button" href="@Url.Action("Create")">
+                                        <i class="fa fa-plus-square" aria-hidden="true"></i> Thêm mới
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- /.card-header -->
+                        <div class="card-body">
+                            <table id="table1" class="table table-bordered table-striped">
+
+                                <thead>
+                                    <tr>
+                                        <th>Tài khoản</th>
+                                        <th>Họ và tên</th>
+                                        <th>Khoa</th>
+                                        <th>Lớp</th>
+                                        <th>MSSV</th>
+                                        <th>Ngày sinh</th>
+                                        <th>Số điện thoại</th>
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model)
+                                    {
+
+                                    <tr>
+                                        <td>
+                                            <a href="@Url.Action("Details","DBUsers", new { id = item.ID })">
+                                                @item.TenTK
+                                            </a>
+                                        </td>
+                                        <td>
+                                            <a href="@Url.Action("Details", new { id = item.ID ,id2= ViewBag.IdCLB})">
+                                                @item.Ho @item.Ten
+                                            </a>
+                                        </td>
+                                        <td>
+                                            @item.Khoa
+                                        </td>
+                                        <td>
+                                            @item.Lop
+                                        </td>
+                                        <td>
+                                            @item.MSSV
+                                        </td>
+                                        @if (item.NgaySinh == null) { <td> </td>}
+                                        else { 
+                                        <td>
+                                            @item.NgaySinh.Value.ToShortDateString()
+                                        </td>}
+                                        <td>
+                                            @item.SDT
+                                        </td>
+
+
+                                    </tr>
+                                    }
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <th>Tài khoản</th>
+                                        <th>Họ và tên</th>
+ 
+                                        <th>Khoa</th>
+                                        <th>Lớp</th>
+                                        <th>MSSV</th>
+                                        <th>Ngày sinh</th>
+                                        <th>Số điện thoại</th>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

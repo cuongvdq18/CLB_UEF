@@ -1,0 +1,231 @@
+﻿@model IEnumerable < ClubPortalMS.ViewModel.User.UserViewModel>
+>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper my-2">
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class="m-0">Tài khoản người dùng</h1>
+                </div><!-- /.col -->
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="#">Trang chủ</a></li>
+                        <li class="breadcrumb-item active">Tài khoản người dùng</li>
+                    </ol>
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
+    </div>
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Quản lý Tài khoản người dùng</h3>
+                        </div>
+
+                        <!-- /.card-header -->
+                        <div class="card-body">
+                            <div class="col-2" style="position: absolute; z-index: 1; ">
+                            </div>
+                            <table id="table1" class="table table-bordered table-striped">
+
+                                <thead>
+                                    <tr>
+                                        <th>Tên tài khoản</th>
+                                        <th>Họ và tên</th>
+                                        <th>Email</th>
+                                        <th>Ngày tạo</th>
+                                        <th>Xác thực email</th>
+                                        <th>Tình trạng</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model)
+                                    {
+
+                                    <tr>
+                                        <td>
+                                            <a href="@Url.Action("Details", new { id = item.ID })">
+                                                @item.Username
+                                                </a>    
+                                        </td>
+                                        <td>
+                                            <a href="@Url.Action("Details", new { id = item.ID })">
+                                               @item.LastName @item.FirstName
+                                            </a>
+                                        </td>
+                                        <td>
+                                            <a href="@Url.Action("Details", new { id = item.ID })">
+                                                @item.Email
+                                            </a>
+                                        </td>
+                                        <td>
+                                            @item.DateCreated
+                                        </td>
+
+                                        <td>
+                                            @if (item.EmailConfirmation == true)
+                                            {<p>Đã xác thực </p>}
+                                            else
+                                            { <p>Chưa xác thực</p>}
+                                        </td>
+                                        <td>
+                                            @if (item.IsLocked == true)
+                                            {<p>Khóa </p>}
+                                            else
+                                            { <p>Chưa khóa</p>}
+                                        </td>
+                                    </tr>
+                                    }
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <th>Tên tài khoản</th>
+                                        <th>Họ và tên</th>
+                                        <th>Email</th>
+                                        <th>Ngày tạo</th>
+                                        <th>Xác thực email</th>
+                                        <th>Tình trạng</th>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    @*<section class="content">
+            <div class="card">
+                <div class="card-header">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <p>
+                                @Html.ActionLink("Create New", "Create")
+                            </p>
+
+                            <strong class="text-danger text-uppercase">Danh Sách</strong>
+                        </div>
+                        <div class="col-md-6 text-right">
+                            <a href="#" class="btn btn-sm btn-success">Content</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <table class="table">
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.FirstName)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.LastName)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Username)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Email)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Identifier)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.EmailConfirmation)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.HashedPassword)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Salt)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.IsLocked)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.DateCreated)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.IsDeleted)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.ActivationCode)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.NgayXoa)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.UserDeleted)
+                            </th>
+                            <th></th>
+                        </tr>
+
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.FirstName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.LastName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Username)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Email)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Identifier)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.EmailConfirmation)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.HashedPassword)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Salt)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.IsLocked)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.DateCreated)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.IsDeleted)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.ActivationCode)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.NgayXoa)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.UserDeleted)
+                                </td>
+                                <td>
+                                    @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+                                    @Html.ActionLink("Details", "Details", new { id = item.ID }) |
+                                    @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+                                </td>
+                            </tr>
+                        }
+
+                    </table>
+
+                </div>
+            </div>
+        </section>*@
+    <!-- /.content -->
+</div>
+<!-- /.content-wrapper -->

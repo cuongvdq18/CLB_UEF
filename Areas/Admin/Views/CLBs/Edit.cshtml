@@ -1,0 +1,119 @@
+﻿@model ClubPortalMS.Models.CLBViewModels
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+
+@using (Html.BeginForm("Edit", "CLBs", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <div class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1 class="m-0">Câu lạc bộ</h1>
+                    </div><!-- /.col -->
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a href="#">Trang chủ</a></li>
+                            <li class="breadcrumb-item active">Câu lạc bộ</li>
+                        </ol>
+                    </div><!-- /.col -->
+                </div><!-- /.row -->
+            </div><!-- /.container-fluid -->
+        </div>
+        <!-- Main content -->
+        <section class="content">
+            <!-- Default box -->
+            <div class="card">
+                <div class="card-header">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <strong class="text-danger text-uppercase">Chỉnh Sửa</strong>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="card-body">
+
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    @Html.HiddenFor(model => model.ID)
+                    @if (ViewBag.Message != null)
+                    {
+                        <div class="alert alert-danger">
+                            <strong>@ViewBag.Message</strong>
+                        </div>
+                    }
+                    <div class="form-group">
+                        <label for="inputName2" class="col-md-4 control-label">Tên câu lạc bộ:</label>
+                        <div class="col-md-12">
+                            @Html.EditorFor(model => model.TenCLB, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.TenCLB, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputName2" class="col-md-4 control-label">Mô tả:</label>
+                        <div class="col-md-12">
+                            @Html.EditorFor(model => model.Mota, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Mota, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputName2" class="col-md-4 control-label">Ngày thành lập:</label>
+                        <div class="col-md-12">
+                            @Html.EditorFor(model => model.NgayThanhLap, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.NgayThanhLap, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputName2" class="col-md-4 control-label">Liên hệ:</label>
+                        <div class="col-md-12">
+                            @Html.EditorFor(model => model.LienHe, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.LienHe, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-12">
+                            @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputName2" class="col-md-4 control-label">Loại câu lạc bộ:</label>
+                        <div class="col-md-12">
+                            @Html.DropDownList("IdLoaiCLB", null, htmlAttributes: new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.IdLoaiCLB, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputName2" class="col-md-4 control-label">Ảnh đại diện:</label>
+                        <div class="col-md-12">
+                            <img src="@Url.Content(Model.HinhCLB)" style="max-width: 500px; max-height: 400px" />
+                            <input type="file" name="ImageFile" property="Chỉnh sửa ảnh" onchange="ShowImg(this, document.getElementById('preView'))" />
+                        </div>
+                    </div>
+
+
+
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="submit" value="Lưu lại" class="btn btn-primary" />
+                        </div>
+                    </div>
+                </div>
+                <!-- /.card-body -->
+            </div>
+            @Html.ActionLink("Quay lại", "Details", new { id = Model.ID })
+            <!-- /.card -->
+        </section>
+        <!-- /.content -->
+    </div>
+    <!-- /.content-wrapper -->
+
+}
+
+

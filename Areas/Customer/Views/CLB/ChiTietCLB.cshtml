@@ -1,0 +1,77 @@
+﻿@model ClubPortalMS.ViewModel.CLB.CLBViewModels
+@{
+    ViewBag.Title = "ChiTietCLB";
+    Layout = "~/Areas/Customer/Views/Shared/_Layout.cshtml";
+}
+
+<div class="page-banner bg-img bg-img-parallax overlay-dark" style="height:150px">
+    <div class="container h-100">
+        <div class="row justify-content-center align-items-center h-100">
+            <div class="col-lg-12">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb breadcrumb-dark bg-transparent justify-content-center py-0">
+                        <li class="breadcrumb-item"><a href="@Url.Action("Index","TrangChu")">Trang Chủ</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Câu lạc bộ</li>
+                        <li class="breadcrumb-item active" aria-current="page">Chi tiết</li>
+                    </ol>
+                </nav>
+                <h1 class="fg-white text-center">CHI TIẾT CÂU LẠC BỘ</h1>
+            </div>
+        </div>
+    </div>
+</div>
+
+<section id="single-product">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-7">
+                <div class="single-product-img">
+                    <img src="@Model.HinhCLB" style="max-height:330px; max-width:652.5px" alt="">
+                </div>
+
+            </div> <!-- End of /.col-md-5 -->
+            <div class="col-md-5">
+                <div class="block">
+                    <div class="product-des">
+                        <h4>@Model.TenCLB</h4>
+                        <p class="price">@Model.NgayThanhLap</p>
+                        <p class="ngat-dong-7">@Model.Mota</p>
+                        <a class="view-link" href="mailto:@Model.Email"><i class="fa fa-plus-circle"></i>Liên hệ: @Model.Email</a>
+                    </div>	<!-- End of /.product-des -->
+                </div> <!-- End of /.block -->
+            </div>	<!-- End of /.col-md-4 -->
+        </div>	<!-- End of /.row -->
+        <div class="row">
+            <div class="col-md-12">
+                <!-- Nav tabs -->
+                <ul class="nav nav-tabs">
+                    <li class="active"><a href="#home" data-toggle="tab">Thông tin</a></li>
+                    <li><a href="#profile" data-toggle="tab">Thống kê</a></li>
+                </ul>
+
+                <!-- Tab panes -->
+                <div class="tab-content">
+                    <div class="tab-pane active" id="home">
+                        <p<p>Loại Câu lạc bộ: @Model.LoaiCLB</p>
+                        <p>Hot Line: @Model.LienHe</p>
+                        <p>Email: @Model.Email</p>
+                        <p>Fanpage: @Model.FanPage</p>
+                    </div>
+                    <div class="tab-pane" id="profile">
+                        <p>Thành viên: @ViewBag.slTV</p>
+                        <p>Sự kiện: @ViewBag.slSK</p>
+                        <p>Hoạt động: @ViewBag.slHD</p>
+                    </div>
+                </div>
+            </div>	<!-- End of /.col-md-9 -->
+            <div class="col-md-3">
+                <div class="blog-sidebar">
+                    <div class="block">
+                        <img src="images/food-ad.png" alt="">
+                    </div> <!-- End of /.block -->
+                </div>	<!-- End of /.blog-sidebar -->
+            </div>	<!-- End of /.col-md-3 -->
+        </div>	<!-- End of /.row -->
+    </div>	<!-- End of /.Container -->
+</section>
+

@@ -1,0 +1,153 @@
+﻿@model IEnumerable<ClubPortalMS.Models.NhiemVu_ThanhVien>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Profile/Views/Shared/_LayoutProfile.cshtml";
+}
+
+<div class="header-advance-area-style" style="margin-top:3%">
+    <div class="breadcome-area">
+        <div class="container-fluids">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="breadcome-list single-page-breadcome">
+                        <div class="row">
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                <div class="breadcome-heading">
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                <ul class="breadcome-menu">
+                                    <li>
+                                        <a href="#">Trang chủ</a> <span class="bread-slash">/</span>
+                                    </li>
+                                    <li>
+                                        <span class="bread-blod">Quản lý phản hồi</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="data-table-area mg-b-15">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="sparkline13-list">
+                    <div class="sparkline13-hd">
+                        <div class="main-sparkline13-hd">
+                            <h1>Nhiệm Vụ</h1>
+                        </div>
+                    </div>
+                    <div class="sparkline13-graph">
+                        <div class="datatable-dashv1-list custom-datatable-overright">
+
+                            <table id="table" data-toggle="table" data-pagination="true" data-search="true" data-show-columns="true" data-show-pagination-switch="true" data-show-refresh="true" data-key-events="true" data-show-toggle="true" data-resizable="true" data-cookie="true"
+                                   data-cookie-id-table="saveId" data-show-export="true" data-click-to-select="true" data-toolbar="#toolbar">
+                                <thead>
+                                    <tr>
+                                        <th data-field="state" data-checkbox="true"></th>
+                                        <th data-field="Tiêu đề" data-editable="true">Tiêu đề</th>
+                                        <th data-field="Mô tả" data-editable="true">Mô tả</th>
+                                        <th data-field="Thời gian kết thúc" data-editable="true">Thời gian kết thúc</th>
+                                        <th data-field="Ghi chú" data-editable="true">Ghi chú</th>
+                                        <th data-field="Trạng thái" data-editable="true">Bài làm</th>
+                                        <th data-field="action">Tác vụ</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model)
+                                    {
+                                    <tr class="sacss">
+                                        <td></td>
+                                        <td>@item.NhiemVu.TieuDe</td>
+                                        <td>@item.NhiemVu.MoTa</td>
+                                        <td>@item.NhiemVu.ThoiGianKetThuc</td>
+                                        <td>@item.GhiChu</td>
+                                        @if (item.FileNop == null)
+                                        { <td>Chưa nộp</td>}
+                                        else { <td>@item.TenFileNop</td>}
+
+                                            <td class="datatable-ct">
+                                                <div class="button-ap-list responsive-btn">
+                                                    <div class="btn-group btn-custom-groups" style="margin-left:26%">
+                                                        <a style="font-size:10px" class="btn btn-primary" href="@Url.Action("Details", new { id = item.ID })"><i  class="fa fa-paper-plane" aria-hidden="true"></i></a>
+                                                    </div>
+                                                </div>
+
+                                            </td>
+                                        </tr>
+
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@*<table class="table">
+        <tr>
+            <th>
+                Tiêu đề
+            </th>
+            <th>
+                Mô tả
+            </th>
+            <th>
+                Thời gian kết thúc
+            </th>
+            <th>
+            Ghi chú
+            </th>
+            <th>
+                Trạng thái
+            </th>
+            <th></th>
+        </tr>
+
+    @foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.NhiemVu.TieuDe)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NhiemVu.MoTa)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NhiemVu.ThoiGianKetThuc)
+        </td>
+
+        <td>
+            @Html.DisplayFor(modelItem => item.GhiChu)
+        </td>
+        @if (item.FileNop == null)
+        {
+            <td>
+                Chưa nộp
+            </td>
+            <td>
+                @Html.ActionLink("Nộp", "Details", new { id = item.ID })
+            </td>
+        }
+        else
+        {
+            <td>
+                Đã nộp
+            </td>
+            <td>
+                @Html.ActionLink("Chỉnh sửa", "Details", new { id = item.ID })
+            </td>
+        }
+
+    </tr>
+    }
+
+    </table>*@

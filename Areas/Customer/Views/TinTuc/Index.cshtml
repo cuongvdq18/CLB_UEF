@@ -1,0 +1,91 @@
+﻿@using PagedList.Mvc;
+@using PagedList;
+
+@{
+    ViewBag.Title = "Tin Tức";
+    Layout = "~/Areas/Customer/Views/Shared/_Layout.cshtml";
+    var ListAllNews = (IPagedList<ClubPortalMS.Models.TinTuc>)ViewBag.ListAllNews;
+    double? Trieu = 0;
+    double? Nghin = 0;
+}
+<div class="page-banner bg-img bg-img-parallax overlay-dark" style="height:150px">
+    <div class="container h-100">
+        <div class="row justify-content-center align-items-center h-100">
+            <div class="col-lg-12">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb breadcrumb-dark bg-transparent justify-content-center py-0">
+                        <li class="breadcrumb-item"><a href="@Url.Action("Index","TrangChu")">Trang Chủ</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Tin Tức</li>
+                    </ol>
+                </nav>
+                <h1 class="fg-white text-center">TIN TỨC</h1>
+            </div>
+        </div>
+    </div>
+</div>
+
+<section id="shop">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="product-grid">
+                    <ul>
+                        @foreach (var item in ListAllNews)
+                        {
+                            <li>
+                                <div class="products">
+                                    <a href="@Url.Action("BaiViet","Tintuc", new {id = item.ID})">
+                                        <img src="@item.HinhAnhBaiViet" style="width:360px; height:190px" alt="">
+                                    </a>
+                                    <a href="@Url.Action("BaiViet","Tintuc", new {id = item.ID})">
+                                        <h6 class="ngat-dong">@item.TieuDe</h6>
+                                    </a>
+                                    <div class="blog-post-tag">
+                                        <div class="block">
+                                            <i class="fa fa-clock-o"></i>
+                                            <p>@item.NgayDang.ToShortDateString()</p>
+                                        </div>
+                                        <div class="block">
+                                            <i class="fa fa-eye" aria-hidden="true"></i>
+                                            <p>
+                                                @{
+                                                    Nghin = (double?)item.LuotView / 1000;
+                                                    Trieu = (int?)item.LuotView / 1000000;
+                                                    String Format_Trieu = string.Format("{0:0}", Trieu) + " Tr";
+                                                    String Format_Nghin = string.Format("{0:0.0}", Nghin) + " N";
+                                                }
+                                                @if (Trieu >= 1)
+                                                {
+                                                    @Format_Trieu
+                                                }
+                                                else if (Nghin >= 1)
+                                                {
+                                                    @Format_Nghin
+                                                }
+                                                else
+                                                {
+                                                    @item.LuotView
+                                                }
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <a class="view-link shutter" href="@Url.Action("BaiViet","Tintuc", new {id = item.ID})">
+                                            Xem thêm
+                                        </a>
+                                    </div>
+                                </div>	<!-- End of /.products -->
+                            </li>
+                        }
+                    </ul>
+                </div>	<!-- End of /.products-grid -->
+
+            </div>	<!-- End of /.col-md-9 -->
+            @Html.PagedListPager(ListAllNews, page => Url.Action("Index", new { page }), new PagedListRenderOptions() { Display = PagedListDisplayMode.IfNeeded, DisplayPageCountAndCurrentLocation = true })
+
+        </div>	<!-- End of /.container -->
+    </div>	<!-- End of /.container -->
+</section>
+
+
+

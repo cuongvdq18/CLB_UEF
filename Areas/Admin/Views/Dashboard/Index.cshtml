@@ -1,0 +1,905 @@
+﻿@model ClubPortalMS.ViewModel.ThongKe.ThongKeHDSKViewModel
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-12">
+                <h1 class="m-0">Thống kê</h1>
+            </div><!-- /.col -->
+        </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+
+    <div class="content-header">
+        <section class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg col">
+                        <!-- small box -->
+                        <div class="small-box bg-info">
+                            <div class="inner">
+                                <h3>@ViewBag.slclb</h3>
+
+                                <p>Câu lạc bộ</p>
+                            </div>
+                            <div class="icon">
+                                <i class="fa fa-users" aria-hidden="true"></i>
+                            </div>
+                            <a href="@Url.Action("Index", "CLBs")" class="small-box-footer">Xem thêm <i class="fas fa-arrow-circle-right"></i></a>
+                        </div>
+                    </div>
+                    <!-- ./col -->
+                    <div class="col-lg col">
+                        <!-- small box -->
+                        <div class="small-box bg-success">
+                            <div class="inner">
+                                <h3>@ViewBag.sltv<sup style="font-size: 20px"></sup></h3>
+
+                                <p>Thành viên</p>
+                            </div>
+                            <div class="icon">
+                                <i class="fa fa-user" aria-hidden="true"></i>
+                            </div>
+                            <a href="@Url.Action("CLB_TV", "ThanhViens")" class="small-box-footer">Xem thêm <i class="fas fa-arrow-circle-right"></i></a>
+                        </div>
+                    </div>
+                    <!-- ./col -->
+                    <div class="col-lg col">
+                        <!-- small box -->
+                        <div class="small-box bg-warning">
+                            <div class="inner" style="color:white">
+                                <h3>@ViewBag.slsk</h3>
+                                <p>Sự kiện</p>
+                            </div>
+                            <div class="icon">
+                                <i class="fa fa-star" aria-hidden="true"></i>
+                            </div>
+                            <a href="@Url.Action("Index", "SuKiens")" class="small-box-footer"><span style="color:white">Xem thêm </span><i style="color:white" class="fas fa-arrow-circle-right"></i></a>
+                        </div>
+                    </div>
+                    <!-- ./col -->
+                    <div class="col-lg col">
+                        <!-- small box -->
+                        <div class="small-box bg-danger">
+                            <div class="inner">
+                                <h3>@ViewBag.slhd</h3>
+
+                                <p>Hoạt động</p>
+                            </div>
+                            <div class="icon">
+                                <i class="fa fa-suitcase" aria-hidden="true"></i>
+                            </div>
+                            <a href="@Url.Action("Index", "QLDSHoatDongs")" class="small-box-footer">Xem thêm <i class="fas fa-arrow-circle-right"></i></a>
+                        </div>
+                    </div>
+                    <div class="col-lg col">
+                        <!-- small box -->
+                        <div class="small-box bg-primary">
+                            <div class="inner">
+                                <h3>
+                                   @(((decimal)ViewBag.LuotView).ToString("n0"))</h3>
+                                <p>Lượt view</p>
+                            </div>
+                            <div class="icon">
+                                <i class="fa fa-eye" aria-hidden="true"></i>
+                            </div>
+                            <a href="#" class="small-box-footer">Xem thêm <i class="fas fa-arrow-circle-right"></i></a>
+                        </div>
+                    </div>
+                    <!-- ./col -->
+                </div>
+                <div class="row">
+                    <!-- Left col -->
+                    <section class="col-lg-6 connectedSortable">
+                        <!-- Custom tabs (Charts with tabs)-->
+                        <div class="card">
+                            <div class="card-header">
+                                <p class="card-title" style="font-size: 20px">
+                                    <i class="fas fa-chart-pie mr-1"></i>
+                                    Tổng số sinh viên
+                                </p>
+                                <div class="card-tools">
+                                    <ul class="nav nav-pills ml-auto">
+                                        <li class="nav-item">
+                                            <a class="nav-link active" href="#khoa-chart" data-toggle="tab">Khoa</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="#Khoa-hoc-chart" data-toggle="tab">Khóa học</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="#Clb-chart" data-toggle="tab">Câu lạc bộ</a>
+                                        </li>
+                                        <li class="dropdown">
+                                            <button class="btn btn-success dropdown-toggle" style="margin-left:10px;height:40px" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                Xuất Excel
+                                            </button>
+                                            <div class="dropdown-menu " aria-labelledby="dropdownMenuButton">
+                                                <a class="dropdown-item" onclick="return exportToCsv_Khoa();">Khoa</a>
+                                                <a class="dropdown-item" onclick="return exportToCsv_KhoaHoc();">Khóa học</a>
+                                                <a class="dropdown-item" onclick="return exportToCsv_CLB();">Câu lạc bộ</a>
+                                            </div>
+                                        </li>
+
+                                    </ul>
+                                </div>
+                            </div><!-- /.card-header -->
+                            <div class="card-body">
+                                <div class="tab-content p-0">
+                                    <!-- Morris chart - Sales -->
+                                    <div class="chart tab-pane active" id="khoa-chart"
+                                         style="position: relative; height: auto;">
+
+                                        <canvas id="chart-line" style="height: auto;"></canvas>
+                                    </div>
+                                    <div class="chart tab-pane" id="Khoa-hoc-chart">
+                                        <canvas id="chart-line1" style="height: auto;"></canvas>
+                                    </div>
+                                    <div class="chart tab-pane" id="Clb-chart">
+                                        <canvas id="chart-line2" style="height: auto;"></canvas>
+                                    </div>
+                                </div>
+                            </div><!-- /.card-body -->
+                        </div>
+                        <!-- /.card -->
+                    </section>
+
+                    <section class="col-lg-6 connectedSortable">
+                        <!-- Custom tabs (Charts with tabs)-->
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 class="card-title" style="font-size: 20px">
+                                    <i class="fas fa-chart-pie mr-1"></i>
+                                    Tần suất hoạt động CLB
+                                </h3>
+                                <div class="card-tools">
+                                    <ul class="nav nav-pills ml-auto">
+                                        <li class="nav-item">
+                                            <a class="nav-link active" href="#HD-chart" data-toggle="tab">Hoạt động</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="#SK-chart" data-toggle="tab">Sự kiện</a>
+                                        </li>
+
+                                        <li class="dropdown">
+                                            <button class="btn btn-success dropdown-toggle" style="margin-left:10px;height:40px" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                Xuất Excel
+                                            </button>
+                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                <a class="dropdown-item" onclick="return exportToCsv_HoatDong();">Hoạt động</a>
+                                                <a class="dropdown-item" onclick="return exportToCsv_SuKien();">Sự kiện</a>
+                                            </div>
+                                        </li>
+
+                                    </ul>
+                                </div>
+                            </div><!-- /.card-header -->
+                            <div class="card-body">
+                                <div class="tab-content p-0">
+                                    <!-- Morris chart - Sales -->
+                                    <div class="chart tab-pane active" id="HD-chart"
+                                         style="position: relative; height: auto;">
+                                        <canvas id="chart-hd" style="height: auto;"></canvas>
+                                    </div>
+                                    <div class="chart tab-pane" id="SK-chart">
+                                        <canvas id="chart-sk" style="height: auto;"></canvas>
+                                    </div>
+                                </div>
+                            </div><!-- /.card-body -->
+                        </div>
+                        <!-- /.card -->
+                    </section>
+                    <!-- /.Left col -->
+
+                    <section class="col-lg-6 connectedSortable" id="reload-target">
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 class="card-title">
+                                    <i class="fas fa-chart-pie mr-1"></i>
+                                    Tần suất sự kiện
+                                </h3>
+
+                            </div>
+                            <div class="card-body">
+                                @using (Html.BeginForm())
+                                {
+
+                                    <div class="chart tab-pane">
+                                        <div class="row">
+                                            <div class="col-lg-4">
+                                                @Html.DropDownList("IdCLBSK", ViewBag.DsCLBSK as SelectList, "Chọn Câu lạc bộ", new { @class = "form-control" })
+                                                @Html.ValidationMessageFor(model => model.IdCLBSK, "", new { @class = "text-danger" })
+                                            </div>
+                                            <div class="col-lg-3">
+                                                @Html.DropDownList("YearSK", ViewBag.selectListYear as SelectList, "Chọn năm", new { @class = "form-control" })
+                                                @Html.ValidationMessageFor(model => model.YearSK, "", new { @class = "text-danger" })
+                                            </div>
+                                            <div class="col-lg-2">
+                                                <input type="submit" class="btn btn-info" value="Xác nhận" />
+                                            </div>
+                                            <div class="col-lg-3">
+                                                <a class="btn btn-success" onclick="return exportToCsv_TanSuatSuKien();">
+                                                    Xuất Excel
+                                                </a>
+                                            </div>
+
+                                        </div>
+
+                                        <canvas id="chart-sk-loc" style="height: auto;margin-top:5%"></canvas>
+                                    </div>
+
+                                }
+                            </div>
+                            <div class="card-footer"><p style="text-align: center; ">Biểu đồ tần suất sự kiện của <span style=" font-weight: bold; color: #4169E1 ">@ViewBag.getNameClubSK</span> theo năm <span style=" font-weight: bold;color: #4169E1 ">@ViewBag.getYearClubSK</span></p></div>
+
+                            <!-- /.card-body -->
+                        </div>
+                    </section>
+                    <section class="col-lg-6 connectedSortable">
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 class="card-title">
+                                    <i class="fas fa-chart-pie mr-1"></i>
+                                    Tần suất hoạt động
+                                </h3>
+                            </div>
+                            <div class="card-body">
+                                @using (Html.BeginForm())
+                                {
+
+                                    <div class="chart tab-pane active" id="HD-Loc-chart">
+                                        <div class="row">
+                                            <div class="col-lg-4">
+                                                @Html.DropDownList("IdCLBHD", ViewBag.DsCLB as SelectList, "Chọn Câu lạc bộ", new { @class = "form-control" })
+                                                @Html.ValidationMessageFor(model => model.IdCLBHD, "", new { @class = "text-danger" })
+                                            </div>
+                                            <div class="col-lg-3">
+                                                @Html.DropDownList("YearHD", ViewBag.selectListYear as SelectList, "Chọn năm", new { @class = "form-control" })
+                                                @Html.ValidationMessageFor(model => model.YearHD, "", new { @class = "text-danger" })
+                                            </div>
+                                            <div class="col-lg-2">
+                                                <input type="submit" class="btn btn-info" value="Xác nhận" />
+                                            </div>
+                                            <div class="col-lg-3">
+                                                <a class="btn btn-success" onclick="return exportToCsv_TanSuatHoatDong();">
+                                                    Xuất Excel
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <canvas id="chart-hd-loc" style="height: auto; margin-top: 5%"></canvas>
+
+                                    </div>
+                                }
+                            </div>
+
+                            <div class="card-footer"><p style="text-align:center">Biểu đồ tần suất hoạt động của <span style=" font-weight: bold; color: #4169E1 ">@ViewBag.getNameClubHD</span> theo năm <span style=" font-weight: bold; color: #4169E1 ">@ViewBag.getYearClubHD</span></p> </div>
+                            <!-- /.card-body -->
+                        </div>
+                    </section>
+
+                    <!-- right col -->
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+<script src="~/Areas/Admin/Resource/other/jquery.min.js"></script>
+<script src="~/Areas/Admin/Resource/dist/js/xlsx.full.min.js"></script>
+
+<script>
+    // ------------------------------Export Excel------------------------
+
+    // Export CSV Khoa
+    exportToCsv_Khoa = function () {
+        var result = @Html.Raw(ViewBag.DataPoints);
+        d = []
+        e = []
+
+        for(var i = 0; i < result.length; i++){
+            d.push(result[i].TenKhoa);
+            e.push(result[i].soSV);
+        }
+
+
+        var Results = [
+            // ["Col1", "Col2", "Col3", "Col4"],
+            // ["Data", 50, 100, 500],
+            // ["Data", -100, 20, 100],
+            // myLabels,
+            d,
+            e,
+
+        ];
+        var today = new Date();
+        var dd = String(today.getDate()).padStart(2, '0');
+        var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+        var yyyy = today.getFullYear();
+        today = dd + '/' + mm + '/' + yyyy;
+        var CsvString = "";
+        CsvString += "Data result of " + today + "\n";
+        Results.forEach(function (RowItem, RowIndex) {
+            RowItem.forEach(function (ColItem, ColIndex) {
+                CsvString += ColItem + ',';
+            });
+            CsvString += "\r\n";
+        });
+        CsvString = "data:application/csv;charset=utf-8,%EF%BB%BF" + encodeURIComponent(CsvString);
+        var x = document.createElement("A");
+        x.setAttribute("href", CsvString);
+        x.setAttribute("download", "data_khoa" + today + ".csv");
+        document.body.appendChild(x);
+        x.click();
+    }
+    // Export CSV KhoaHoc
+    exportToCsv_KhoaHoc = function () {
+        var result = @Html.Raw(ViewBag.DataPoints1);
+        d = []
+        e = []
+
+        for(var i = 0; i < result.length; i++){
+            d.push(result[i].TenKhoaHoc);
+            e.push(result[i].soSV);
+        }
+
+
+        var Results = [
+            // ["Col1", "Col2", "Col3", "Col4"],
+            // ["Data", 50, 100, 500],
+            // ["Data", -100, 20, 100],
+            // myLabels,
+            d,
+            e,
+
+        ];
+        var today = new Date();
+        var dd = String(today.getDate()).padStart(2, '0');
+        var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+        var yyyy = today.getFullYear();
+        today = dd + '/' + mm + '/' + yyyy;
+        var CsvString = "";
+        CsvString += "Data result of " + today + "\n";
+        Results.forEach(function (RowItem, RowIndex) {
+            RowItem.forEach(function (ColItem, ColIndex) {
+                CsvString += ColItem + ',';
+            });
+            CsvString += "\r\n";
+        });
+        CsvString = "data:application/csv;charset=utf-8,%EF%BB%BF" + encodeURIComponent(CsvString);
+        var x = document.createElement("A");
+        x.setAttribute("href", CsvString);
+        x.setAttribute("download", "data_khoahoc" + today + ".csv");
+        document.body.appendChild(x);
+        x.click();
+    }
+    // Export CSV CLB
+    exportToCsv_CLB = function () {
+        var result = @Html.Raw(ViewBag.DataPoints2);
+        d = []
+        e = []
+
+        for(var i = 0; i < result.length; i++){
+            d.push(result[i].TenCLB);
+            e.push(result[i].soSV);
+        }
+
+
+        var Results = [
+            // ["Col1", "Col2", "Col3", "Col4"],
+            // ["Data", 50, 100, 500],
+            // ["Data", -100, 20, 100],
+            // myLabels,
+            d,
+            e,
+
+        ];
+        var today = new Date();
+        var dd = String(today.getDate()).padStart(2, '0');
+        var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+        var yyyy = today.getFullYear();
+        today = dd + '/' + mm + '/' + yyyy;
+        var CsvString = "";
+        CsvString += "Data result of " + today + "\n";
+        Results.forEach(function (RowItem, RowIndex) {
+            RowItem.forEach(function (ColItem, ColIndex) {
+                CsvString += ColItem + ',';
+            });
+            CsvString += "\r\n";
+        });
+        CsvString = "data:application/csv;charset=utf-8,%EF%BB%BF" + encodeURIComponent(CsvString);
+        var x = document.createElement("A");
+        x.setAttribute("href", CsvString);
+        x.setAttribute("download", "data_clb" + today + ".csv");
+        document.body.appendChild(x);
+        x.click();
+    }
+    // Export CSV HoatDong
+    exportToCsv_HoatDong = function () {
+        var result = @Html.Raw(ViewBag.DataPoints3);
+        d = []
+        e = []
+
+        for(var i = 0; i < result.length; i++){
+            d.push("Năm " + result[i].HDtheoNam);
+            e.push(result[i].soHD);
+        }
+
+
+        var Results = [
+            // ["Col1", "Col2", "Col3", "Col4"],
+            // ["Data", 50, 100, 500],
+            // ["Data", -100, 20, 100],
+            // myLabels,
+            d,
+            e,
+
+        ];
+        var today = new Date();
+        var dd = String(today.getDate()).padStart(2, '0');
+        var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+        var yyyy = today.getFullYear();
+        today = dd + '/' + mm + '/' + yyyy;
+        var CsvString = "";
+        CsvString += "Data result of " + today + "\n";
+        Results.forEach(function (RowItem, RowIndex) {
+            RowItem.forEach(function (ColItem, ColIndex) {
+                CsvString += ColItem + ',';
+            });
+            CsvString += "\r\n";
+        });
+        CsvString = "data:application/csv;charset=utf-8,%EF%BB%BF" + encodeURIComponent(CsvString);
+        var x = document.createElement("A");
+        x.setAttribute("href", CsvString);
+        x.setAttribute("download", "data_hoatdong" + today + ".csv");
+        document.body.appendChild(x);
+        x.click();
+    }
+    // Export CSV SuKien
+    exportToCsv_SuKien = function () {
+        var result = @Html.Raw(ViewBag.DataPoints6);
+        d = []
+        e = []
+
+        for(var i = 0; i < result.length; i++){
+            d.push("Năm " + result[i].HDtheoNam);
+            e.push(result[i].soHD);
+        }
+
+
+        var Results = [
+            // ["Col1", "Col2", "Col3", "Col4"],
+            // ["Data", 50, 100, 500],
+            // ["Data", -100, 20, 100],
+            // myLabels,
+            d,
+            e,
+
+        ];
+        var today = new Date();
+        var dd = String(today.getDate()).padStart(2, '0');
+        var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+        var yyyy = today.getFullYear();
+        today = dd + '/' + mm + '/' + yyyy;
+        var CsvString = "";
+        CsvString += "Data result of " + today + "\n";
+        Results.forEach(function (RowItem, RowIndex) {
+            RowItem.forEach(function (ColItem, ColIndex) {
+                CsvString += ColItem + ',';
+            });
+            CsvString += "\r\n";
+        });
+        CsvString = "data:application/csv;charset=utf-8,%EF%BB%BF" + encodeURIComponent(CsvString);
+        var x = document.createElement("A");
+        x.setAttribute("href", CsvString);
+        x.setAttribute("download", "data_sukien" + today + ".csv");
+        document.body.appendChild(x);
+        x.click();
+    }
+    // Export CSV TanSuatHoatDong
+        exportToCsv_TanSuatHoatDong = function () {
+        var result = @Html.Raw(ViewBag.DataPoints4);
+        d = []
+        e = []
+
+        for(var i = 0; i < result.length; i++){
+            d.push("Tháng " + result[i].HDtheoThang);
+            e.push(result[i].soHD);
+        }
+
+
+        var Results = [
+            // ["Col1", "Col2", "Col3", "Col4"],
+            // ["Data", 50, 100, 500],
+            // ["Data", -100, 20, 100],
+            // myLabels,
+            d,
+            e,
+
+        ];
+        var today = new Date();
+        var dd = String(today.getDate()).padStart(2, '0');
+        var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+        var yyyy = today.getFullYear();
+        today = dd + '/' + mm + '/' + yyyy;
+        var CsvString = "";
+        CsvString += "Data result of " + today + "\n";
+        Results.forEach(function (RowItem, RowIndex) {
+            RowItem.forEach(function (ColItem, ColIndex) {
+                CsvString += ColItem + ',';
+            });
+            CsvString += "\r\n";
+        });
+        CsvString = "data:application/csv;charset=utf-8,%EF%BB%BF" + encodeURIComponent(CsvString);
+        var x = document.createElement("A");
+        x.setAttribute("href", CsvString);
+        x.setAttribute("download", "data_tansuatsukien" + today + ".csv");
+        document.body.appendChild(x);
+        x.click();
+    }
+    // Export CSV TanSuatSuKien
+    exportToCsv_TanSuatSuKien  = function () {
+        var result = @Html.Raw(ViewBag.DataPoints5);
+        d = []
+        e = []
+
+        for(var i = 0; i < result.length; i++){
+            d.push("Tháng " + result[i].HDtheoThang);
+            e.push(result[i].soHD);
+        }
+
+
+        var Results = [
+            // ["Col1", "Col2", "Col3", "Col4"],
+            // ["Data", 50, 100, 500],
+            // ["Data", -100, 20, 100],
+            // myLabels,
+            d,
+            e,
+
+        ];
+        var today = new Date();
+        var dd = String(today.getDate()).padStart(2, '0');
+        var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+        var yyyy = today.getFullYear();
+        today = dd + '/' + mm + '/' + yyyy;
+        var CsvString = "";
+        CsvString += "Data result of " + today + "\n";
+        Results.forEach(function (RowItem, RowIndex) {
+            RowItem.forEach(function (ColItem, ColIndex) {
+                CsvString += ColItem + ',';
+            });
+            CsvString += "\r\n";
+        });
+        CsvString = "data:application/csv;charset=utf-8,%EF%BB%BF" + encodeURIComponent(CsvString);
+        var x = document.createElement("A");
+        x.setAttribute("href", CsvString);
+        x.setAttribute("download", "data_tansuathoatdong" + today + ".csv");
+        document.body.appendChild(x);
+        x.click();
+    }
+
+    // ------------------------------Chart------------------------
+
+    //chart lọc sv theo khoa
+    $(document).ready(function () {
+        var colors = [];
+        while (colors.length < 100) {
+            do {
+                var color = Math.floor((Math.random() * 1000000) + 1);
+            } while (colors.indexOf(color) >= 0);
+            colors.push("#" + ("000000" + color.toString(16)).slice(-6));
+        }
+        var result = @Html.Raw(ViewBag.DataPoints);
+        var dataP = [];
+        var labelP = [];
+        for(var i = 0; i < result.length; i++){
+            labelP.push(result[i].TenKhoa);
+            dataP.push(result[i].soSV);
+        }
+
+        var ctx = $("#chart-line");
+        var ChartKhoa = new Chart(ctx, {
+            type: 'pie',
+            data: {
+                labels: labelP,
+                datasets: [ {
+                    data: dataP,
+                    borderColor: "white",
+                    fill: false,
+                    backgroundColor: colors.slice(0, 100),
+                }]
+            },
+            options: {
+                title: {
+                    display: true,
+                    fontSize: '20',
+                    text: 'Số lượng sinh viên theo khoa'
+
+                },
+                legend: {
+                    display: true,
+                    position: 'right'
+                }
+            }
+        });
+
+    });
+    //chart lọc sv theo khóa học
+    $(document).ready(function () {
+         var colors = [];
+         while (colors.length < 100) {
+             do {
+                 var color = Math.floor((Math.random() * 1000000) + 1);
+             } while (colors.indexOf(color) >= 0);
+             colors.push("#" + ("000000" + color.toString(16)).slice(-6));
+         }
+        var result = @Html.Raw(ViewBag.DataPoints1);
+        var dataPoints = [];
+        var labelPoints = [];
+        for(var i = 0; i < result.length; i++){
+            labelPoints.push(result[i].TenKhoaHoc);
+            dataPoints.push(result[i].soSV);
+        }
+
+        var ctx = $("#chart-line1");
+        var myLineChart = new Chart(ctx, {
+            type: 'pie',
+            data: {
+                labels: labelPoints,
+                datasets: [ {
+                    data: dataPoints,
+                    borderColor: "white",
+                    fill: false,
+                    backgroundColor: colors.slice(0, 100),
+                }]
+            },
+            options: {
+                title: {
+                    display: true, fontSize: '20',
+                    text: 'Số lượng sinh viên theo khóa học'
+
+                },
+                legend: {
+                    display: true,
+                    position: 'right'
+                }
+            }
+        });
+     });
+    //chart lọc sinh viên theo clb
+    $(document).ready(function () {
+             var colors = [];
+             while (colors.length < 100) {
+                 do {
+                     var color = Math.floor((Math.random() * 1000000) + 1);
+                 } while (colors.indexOf(color) >= 0);
+                 colors.push("#" + ("000000" + color.toString(16)).slice(-6));
+             }
+        var result = @Html.Raw(ViewBag.DataPoints2);
+        var dataPoints = [];
+        var labelPoints = [];
+        for(var i = 0; i < result.length; i++){
+            labelPoints.push(result[i].TenCLB);
+            dataPoints.push(result[i].soSV);
+        }
+
+        var ctx = $("#chart-line2");
+        var myLineChart = new Chart(ctx, {
+            type: 'pie',
+            data: {
+                labels: labelPoints,
+                datasets: [ {
+                    data: dataPoints,
+                    borderColor: "white",
+                    fill: false,
+                    backgroundColor: colors.slice(0, 100),
+                }]
+            },
+            options: {
+                title: {
+                    display: true, fontSize: '20',
+                    text: 'Số lượng sinh viên theo câu lạc bộ'
+
+                },
+                legend: {
+                    display: false,
+                    position: 'right'
+                }
+            }
+        });
+         });
+    //chart lọc hoạt động theo năm
+    $(document).ready(function () {
+        var colors = [];
+        while (colors.length < 100) {
+            do {
+                var color = Math.floor((Math.random() * 1000000) + 1);
+            } while (colors.indexOf(color) >= 0);
+            colors.push("#" + ("000000" + color.toString(16)).slice(-6));
+        }
+        var result = @Html.Raw(ViewBag.DataPoints3);
+        var dataPoints = [];
+        var labelPoints = [];
+        for(var i = 0; i < result.length; i++){
+            labelPoints.push("Năm "+result[i].HDtheoNam);
+            dataPoints.push(result[i].soHD);
+            //
+            console.log(result[i].HDtheoNam);
+            console.log(result[i].soHD);
+        }
+
+        var ctx = $("#chart-hd");
+            var myLineChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: labelPoints,
+                    datasets: [{
+                        data: dataPoints,
+                        borderColor: "black",
+
+                        fill: false,
+                        backgroundColor: colors.slice(0, 100),
+                    }]
+                },
+                options: {
+                    title: {
+                        fontColor: 'black',
+                        fontSize: '20',
+                        display: true,
+                        text: 'Tần suất tổ chức hoạt động của tất cả câu lạc bộ'
+
+                    },
+                    legend: {
+                        display: false
+
+                    },
+                    scales: {
+                        yAxes: [{
+                            display: true,
+                            ticks: {
+                                beginAtZero: true,
+                                callback: function (value) { if (value % 1 === 0) { return value; } }
+                            }
+                        }]
+                    }
+            }
+        });
+        });
+    //chart lọc sự kiện theo năm
+    $(document).ready(function () {
+                    var colors = [];
+            while (colors.length < 100) {
+                do {
+                    var color = Math.floor((Math.random() * 1000000) + 1);
+                } while (colors.indexOf(color) >= 0);
+                colors.push("#" + ("000000" + color.toString(16)).slice(-6));
+            }
+        var result = @Html.Raw(ViewBag.DataPoints6);
+        var dataPoints = [];
+        var labelPoints = [];
+        for(var i = 0; i < result.length; i++){
+            labelPoints.push("Năm "+result[i].HDtheoNam);
+            dataPoints.push(result[i].soHD);
+        }
+
+        var ctx = $("#chart-sk");
+            var myLineChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: labelPoints,
+                    datasets: [{
+                        data: dataPoints,
+                        borderColor: "black",
+
+                        fill: false,
+                        backgroundColor: colors.slice(0, 100),
+                    }]
+                },
+                options: {
+                    title: {
+                        fontColor: 'black',
+                        fontSize: '20',
+                        display: true,
+                        text: 'Tần suất tổ chức sự kiện các tất cả các câu lạc bộ'
+
+                    },
+                    legend: {
+                        display: false
+                    },
+                    scales: {
+                        yAxes: [{
+                            display: true,
+                            ticks: {
+                                beginAtZero: true,
+                                callback: function (value) { if (value % 1 === 0) { return value; } }
+                            }
+                        }]
+                    }
+            }
+        });
+        });
+    //chart lọc hoạt động theo năm và clb
+    $(document).ready(function () {
+        var colors = ['#007bff', '#28a745', '#333333', '#c3e6cb', '#dc3545', '#6c757d'];
+        var result = @Html.Raw(ViewBag.DataPoints4);
+        var dataPoints = [];
+        var labelPoints = [];
+        for(var i = 0; i < result.length; i++){
+            labelPoints.push("Tháng "+result[i].HDtheoThang);
+            dataPoints.push(result[i].soHD);
+        }
+
+        var ctx = $("#chart-hd-loc");
+            var myLineChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: labelPoints,
+                    datasets: [{
+                        data: dataPoints,
+                        borderColor: "#28a745",
+
+                        fill: false,
+                        backgroundColor: colors.slice(0, 6),
+                    }]
+                },
+                options: {
+
+                    legend: {
+                        display: false
+                    },
+                    scales: {
+                        yAxes: [{
+                            display: true,
+                            ticks: {
+                                beginAtZero: true,
+                                callback: function (value) { if (value % 1 === 0) { return value; } }
+                            }
+                        }]
+                    }
+            }
+        });
+        });
+    //chart lọc sự kiện theo năm và clb
+    $(document).ready(function () {
+        var colors = ['#007bff', '#28a745', '#333333', '#c3e6cb', '#dc3545', '#6c757d'];
+        var result = @Html.Raw(ViewBag.DataPoints5);
+        var dataPoints = [];
+        var labelPoints = [];
+        for(var i = 0; i < result.length; i++){
+            labelPoints.push("Tháng "+result[i].HDtheoThang);
+            dataPoints.push(result[i].soHD);
+        }
+
+        var ctx = $("#chart-sk-loc");
+            var ChartSKLOC = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: labelPoints,
+                    datasets: [{
+                        data: dataPoints,
+                        borderColor: "#28a745",
+
+                        fill: false,
+                        backgroundColor: colors.slice(0, 6),
+                    }]
+                },
+                options: {
+
+                    legend:{
+                        display: false
+                    },
+                    scales: {
+                        yAxes: [{
+                            display: true,
+                            ticks: {
+                                beginAtZero: true,
+                                callback: function (value) { if (value % 1 === 0) { return value; } }
+                            }
+                        }]
+                    }
+            }
+        });
+        });
+
+</script>

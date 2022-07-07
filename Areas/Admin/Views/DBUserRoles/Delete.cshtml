@@ -1,0 +1,63 @@
+﻿@model ClubPortalMS.Models.DBUserRoles
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper my-2">
+        <!-- Main content -->
+        <section class="content">
+            <!-- Default box -->
+            <div class="card">
+                <div class="card-header">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <input type="submit" value="Delete" class="btn btn-default" /> |
+                            @Html.ActionLink("Back to List", "Index")
+                            <strong class="text-danger text-uppercase">Xóa</strong>
+                        </div>
+                        <div class="col-md-6 text-right">
+                            <a href="#" class="btn btn-sm btn-success">Content</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <dl class="dl-horizontal">
+                        <dt>
+                            @Html.DisplayNameFor(model => model.DBRoles.Name)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.DBRoles.Name)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.DBUser.FirstName)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.DBUser.FirstName)
+                        </dd>
+
+                    </dl>
+
+                </div>
+                <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+        </section>
+        <!-- /.content -->
+    </div>
+    <!-- /.content-wrapper -->
+
+    
+}
+

@@ -1,0 +1,119 @@
+﻿@model ClubPortalMS.Models.DangKy
+
+@{
+    ViewBag.Title = "Đăng ký tham gia CLB";
+    Layout = "~/Areas/Profile/Views/Shared/_LayoutProfile.cshtml";
+}
+
+<div class="header-advance-area-style" style="margin-top:3%">
+    <div class="breadcome-area">
+        <div class="container-fluids">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="breadcome-list single-page-breadcome">
+                        <div class="row">
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                <div class="breadcome-heading">
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                <ul class="breadcome-menu">
+                                    <li>
+                                        <a href="#">Trang chủ</a> <span class="bread-slash">/</span>
+                                    </li>
+                                    <li>
+                                        <span class="bread-blod">Đăng ký tham gia CLB</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@using (Html.BeginForm())
+{
+
+<div class="single-pro-review-area mt-t-30 mg-b-15">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-3" >
+                <div class="card card-primary" style="background-color:white;padding:20px 20px 20px 20px">
+                    <div class="card-header">
+                        <h3 class="card-title">Câu lạc bộ đã tham gia</h3>
+                    </div>
+                    <!-- /.card-header -->
+                    <div class="card-body">
+                        @{
+                            if (Enumerable.Count(ViewBag.Dsclbthamgia) == 0)
+                            {
+                                <p>Bạn chưa tham gia câu lạc bộ nào</p>
+                            }
+                            foreach (var item in ViewBag.Dsclbthamgia)
+                            {
+                                <strong><a href="@Url.Action("ChiTietCLB", new { id = item.CLB.ID})"><i class="fa fa-bookmark" aria-hidden="true"></i> @item.CLB.TenCLB</a></strong>
+                                <p class="text-muted gioi-han">
+                                    @item.CLB.Mota
+                                </p>
+                                <hr>
+                            }
+                        }
+                    </div>
+                </div>
+            </div>
+
+            @Html.AntiForgeryToken()
+            <div class="col-md-9">
+                <div class="card" style="background-color:white;padding:20px 20px 20px 20px; height:300px">
+                    <div class="card-header p-2" >
+                        <div class="nav-item"><h4 class="nav-link">Đăng ký tham gia Câu Lạc Bộ</h4></div>
+                    </div>
+                    <div class="card-body">
+                        @if (ViewBag.Message != null)
+                        {
+                            <div class="alert alert-success">
+                                <strong>@ViewBag.Message</strong>
+                            </div>
+                        }@if (ViewBag.Messages != null)
+                        {
+                            <div class="alert alert-danger">
+                                <strong>@ViewBag.Messages</strong>
+                            </div>
+                        }
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.LyDoDkyCLB, htmlAttributes: new { @class = "control-label label-style col-md-4" })
+                            <div class="col-md-12">
+                                @Html.EditorFor(model => model.LyDoDkyCLB, new { htmlAttributes = new { @class = "form-control",
+                               rows = 10,
+                               required = "required",
+                               oninvalid = "this.setCustomValidity('Xin vui lòng nhập lý do đăng ký CLB')",
+                               oninput = "this.setCustomValidity('')",
+
+                           } })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label label-style col-md-4">Danh sách câu lạc bộ</label>
+                            <div class="col-md-12">
+                                @Html.DropDownList("IDCLB", ViewBag.Test as SelectList, "Chọn Câu lạc bộ", new { @class = "form-control",
+                               required = "required",
+                               oninvalid = "this.setCustomValidity('Xin vui lòng chọn câu lạc bộ')",
+                               oninput = "this.setCustomValidity('')"
+                           })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-offset-2 col-md-10">
+                                <input type="submit" value="Gửi đơn" class="btn btn-default" style="float:right;margin-top:3%" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+            }

@@ -1,0 +1,206 @@
+﻿@model ClubPortalMS.Models.ProfileViewModel
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Areas/Profile/Views/Shared/_LayoutProfile.cshtml";
+
+}
+
+<div class="header-advance-area-style" style="margin-top:3%">
+    <div class="breadcome-area">
+        <div class="container-fluids">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="breadcome-list single-page-breadcome">
+                        <div class="row">
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                <div class="breadcome-heading">      
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                <ul class="breadcome-menu">
+                                    <li>
+                                        <a href="#">Trang chủ</a> <span class="bread-slash">/</span>
+                                    </li>
+                                    <li>
+                                        <span class="bread-blod">Hồ sơ</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+ 
+
+<div class="single-pro-review-area mt-t-30 mg-b-15">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                <div class="profile-info-inner">
+                    <div class="profile-img">
+                        <img src="@Model.HinhDaiDien" alt="" />
+                    </div>
+                    <div class="profile-details-hr">
+                        <div class="row">
+                            <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
+                                <div class="address-hr">
+                                    <p><b>Họ và tên</b><br /> @Model.Ho @Model.Ten</p>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
+                                <div class="address-hr tb-sm-res-d-n dps-tb-ntn">
+                                    @if (Model.NgaySinh == null)
+                                    {<p><b>Ngày Sinh</b><br /></p>}
+                                    else { <p><b>Ngày Sinh</b><br /> @Model.NgaySinh.Value.ToString("dd/MM/yyyy")</p>}                                    
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
+                                <div class="address-hr">
+                                    <p><b>Mã số sinh viên</b><br /> @Model.MSSV</p>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
+                                <div class="address-hr tb-sm-res-d-n dps-tb-ntn">
+                                    <p><b>Số điện thoại</b><br /> @Model.SDT</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
+                                <div class="address-hr">
+                                  
+                                    <p><b>Lớp</b><br /> @Model.Lop</p>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
+                                <div class="address-hr tb-sm-res-d-n dps-tb-ntn">
+                                    @if (Model.Khoa_ID != null)
+                                    {
+                                        <p><b>Khoa</b><br /> @Model.TenKhoa</p>
+
+                                    }
+                                    else
+                                    {
+                                        <p><b>Khoa</b><br /></p>
+                                    }
+                                </div>
+                            </div>
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                <div class="address-hr tb-sm-res-d-n dps-tb-ntn">
+                                    <p><b>Email</b><br /> @Model.Email</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            @using (Html.BeginForm("HoSo", "ThongTinTV", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                @Html.AntiForgeryToken()
+                <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                    <div class="product-payment-inner-st res-mg-t-30 analysis-progrebar-ctn">
+                        <ul id="myTabedu1" class="tab-review-design">
+                            <li><a href="#INFORMATION">Cập nhật hồ sơ</a></li>
+                        </ul>
+                        <div id="myTabContent" class="tab-content custom-product-edit st-prf-pro">
+
+                            <div class="product-tab-list tab-pane fade active in" id="INFORMATION">
+                                <div class="row">
+                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                        <div class="review-content-section">
+                                            <div class="row">
+                                                @if (ViewBag.Message != null)
+                                                {
+                                                    <div class="alert alert-success">
+                                                        <strong>@ViewBag.Message</strong>
+                                                    </div>
+                                                }
+
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    @Html.EditorFor(model => model.Ten, new { htmlAttributes = new { @class = "form-control", placeholder = "Tên",
+                                                   required = "required",
+                                                   oninvalid = "this.setCustomValidity('Xin vui lòng nhập tên')",
+                                                   oninput = "this.setCustomValidity('')"
+                                               } })
+                                                </div>
+                                                <div class="form-group">
+                                                    @Html.EditorFor(model => model.Ho, new { htmlAttributes = new { @class = "form-control", placeholder = "Họ và Tên đệm",
+                                                   required = "required",
+                                                   oninvalid = "this.setCustomValidity('Xin vui lòng nhập họ và tên đệm')",
+                                                   oninput = "this.setCustomValidity('')"
+                                               } })
+                                                </div>
+                                                <div class="form-group">
+                                                    @Html.EditorFor(model => model.NgaySinh, new { htmlAttributes = new { @class = "form-control", Value = Model.NgaySinh,
+                                                   required = "required",
+                                                   oninvalid = "this.setCustomValidity('Xin vui lòng nhập Ngày sinh')",
+                                                   oninput = "this.setCustomValidity('')"
+                                               } })
+                                                </div>
+                                                <div class="form-group">
+                                                    @Html.EditorFor(model => model.MSSV, new { htmlAttributes = new { @class = "form-control", placeholder = "Mã số sinh viên",
+                                                   required = "required",
+                                                   oninvalid = "this.setCustomValidity('Xin vui lòng nhập mã số sinh viên')",
+                                                   oninput = "this.setCustomValidity('')"
+                                               } })
+                                                </div>
+                                                <div class="form-group">
+                                              
+                                                </div>
+
+                                            </div>
+                                                <div class="col-lg-6">
+
+                                                    <div class="form-group">
+                                                        @Html.DropDownList("Khoa_ID", null, htmlAttributes: new { @class = "form-control"})
+                                                    </div>
+                                                    <div class="form-group">
+                                                        @Html.EditorFor(model => model.Lop, new { htmlAttributes = new { @class = "form-control", placeholder = "Lớp",
+                                                       required = "required",
+                                                       oninvalid = "this.setCustomValidity('Xin vui lòng nhập Lớp')",
+                                                       oninput = "this.setCustomValidity('')"
+                                                   } })
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        @Html.EditorFor(model => model.SDT, new { htmlAttributes = new { @class = "form-control", placeholder = "Số điện thoại",
+                                                       required = "required",
+                                                       oninvalid = "this.setCustomValidity('Xin vui lòng nhập Số điện thoại')",
+                                                       oninput = "this.setCustomValidity('')"
+                                                   } })
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <input type="file" name="ImageFile" />
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-lg-12">
+                                                            <div class="payment-adress mg-t-15">
+                                                                <button type="submit" class="btn btn-primary waves-effect waves-light mg-b-15 activec" style="float:right">Xác nhận</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+            </div>
+        </div>
+    </div>
+
+

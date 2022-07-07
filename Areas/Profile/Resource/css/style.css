@@ -1,0 +1,21 @@
+﻿.style-center-form
+{
+    width:60%;
+    margin-left:20%;
+}
+img.img-size-style 
+{
+  width:396.73px;
+  height:246.33px;
+}
+.label-style{
+    margin:10px 0 10px 0;
+}
+.gioi-han {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 20px;
+    -webkit-line-clamp: 4;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+}

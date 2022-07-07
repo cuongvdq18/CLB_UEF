@@ -1,0 +1,101 @@
+﻿@using PagedList.Mvc;
+@using PagedList;
+
+@{
+
+    ViewBag.Title = "Xét duyệt thành viên";
+    Layout = "~/Areas/Profile/Views/Shared/_LayoutProfile.cshtml";
+
+}
+
+<div class="header-advance-area-style" style="margin-top:3%">
+    <div class="breadcome-area">
+        <div class="container-fluids">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="breadcome-list single-page-breadcome">
+                        <div class="row">
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                <div class="breadcome-heading">
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                <ul class="breadcome-menu">
+                                    <li>
+                                        <a href="#">Trang chủ</a> <span class="bread-slash">/</span>
+                                    </li>
+                                    <li>
+                                        <span class="bread-blod">Quản lý lịch hoạt động</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="data-table-area mg-b-15">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="sparkline13-list">
+                    <div class="sparkline13-hd">
+                        <div class="main-sparkline13-hd">
+                            <h1>Quản lý <span class="table-project-n">Thành</span> Viên</h1>
+                        </div>
+                    </div>
+                    <div class="sparkline13-graph">
+                        <div class="datatable-dashv1-list custom-datatable-overright">
+
+                            <table id="table" data-toggle="table" data-pagination="true" data-search="true" data-show-columns="true" data-show-pagination-switch="true" data-show-refresh="true" data-key-events="true" data-show-toggle="true" data-resizable="true" data-cookie="true"
+                                   data-cookie-id-table="saveId" data-show-export="true" data-click-to-select="true" data-toolbar="#toolbar">
+                                <thead>
+                                    <tr>
+                                        <th data-field="state" data-checkbox="true"></th>
+                                        <th data-field="Họ và tên" data-editable="true">Họ và tên</th>
+                                        <th data-field="MSSV" data-editable="true">MSSV</th>
+                                        <th data-field="Email" data-editable="true">Email</th>
+                                        <th data-field="Số điện thoại" data-editable="true">Số điện thoại</th>
+                                        <th data-field="Ngày đăng ký" data-editable="true">Ngày đăng ký</th>
+                                        <th data-field="Lý do đăng ký" data-editable="true">Lý do đăng ký</th>
+                                        <th data-field="action">Tác vụ</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in ViewBag.DsTvDangKy)
+                                    {
+                                    <tr class="sacss">
+                                        <td></td>
+                                       
+                                        <td>@item.DangKy.Ten</td>
+                                        <td>@item.DangKy.MSSV</td>
+                                        <td>@item.DangKy.Email</td>
+                                        <td>@item.DangKy.SDT</td>
+                                        <td>@item.DangKy.NgayDangKy</td>
+                                        <td>@item.DangKy.LyDoDkyCLB</td>
+                                        <td class="datatable-ct">
+                                            <div class="button-ap-list responsive-btn">
+                                                <div class="btn-group btn-custom-groups" style="margin-left:26%">
+                                                    <a class="btn btn-primary" href="@Url.Action("ThemTV", new { id = item.DangKy.ID })"><i style="font-size:15px" class="fa fa-check-square" aria-hidden="true"></i></a>
+                                                    <a class="btn btn-danger" href="@Url.Action("TuChoiTV", new { id = item.DangKy.ID })"><i style="font-size:15px" class="fa fa-times-circle" aria-hidden="true"></i></a>
+                                                </div>
+                                            </div>
+
+                                        </td>
+                                    </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                        <div style="margin-top:1%"> @Html.ActionLink("Quay lại", "QLXetDuyetTV_CLB")</div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

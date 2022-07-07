@@ -1,0 +1,304 @@
+﻿
+@{
+    ViewBag.Title = "Trang chủ";
+    Layout = "~/Areas/Customer/Views/Shared/_Layout.cshtml";
+    var slides = (List<ClubPortalMS.Models.Poster>)ViewBag.Slides;
+    var ListNewsFirst = (List<ClubPortalMS.Models.TinTuc>)ViewBag.ListNewsFirst;
+    var ListAlbums = (List<ClubPortalMS.Models.Album>)ViewBag.ListAlbums;
+    var ListHDFirst = (List<ClubPortalMS.Models.HoatDong>)ViewBag.ListHDFirst;
+    double? Trieu = 0;
+    double? Nghin = 0;
+}
+
+<section id="slider-area">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div id="slider" class="nivoSlider">
+                    @foreach (var item in slides)
+                    {
+                        <img src="@item.HinhAnh" alt="" />
+                    }
+                </div> <!-- End of /.nivoslider -->
+            </div>	<!-- End of /.col-md-12 -->
+        </div>	<!-- End of /.row -->
+    </div>	<!-- End of /.container -->
+</section> <!-- End of Section -->
+
+<section id="catagorie">
+    <div class="container  ">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="block">
+                    <div class="block-heading">
+                        <h2>TIN TỨC</h2>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="col-sm-9">
+                                @foreach (var item in ListNewsFirst)
+                                {
+                                    <div class="thumbnail">
+                                        <a class="catagotie-head" href="@Url.Action("BaiViet","TinTuc", new {id = item.ID})">
+                                            <img src="@item.HinhAnhBaiViet" style="max-height:400px;max-width:800px" alt="...">
+                                            <h5 style="color:#4288CA">@item.TieuDe</h5>
+                                        </a>
+                                        <div class="caption">
+                                            <p class="ngat-dong">@item.MoTa</p>
+                                            <div class="row">
+                                                <div class="col-sm-9">
+                                                    <p>
+                                                        <a href="@Url.Action("BaiViet","TinTuc", new {id = item.ID})" class="btn btn-default btn-transparent" role="button">
+                                                            <span>Xem thêm</span>
+                                                        </a>
+                                                    </p>
+                                                </div>
+                                                <div class="col-sm-3">
+                                                    <div class="blog-post-tag">
+                                                        <i class="fa fa-clock-o"></i>
+                                                        @item.NgayDang.ToShortDateString()
+                                                        <i class="fa fa-eye" aria-hidden="true"></i>
+                                                        @{
+                                                            Nghin = (double?)item.LuotView / 1000;
+                                                            Trieu = (int?)item.LuotView / 1000000;
+                                                            String Format_Trieu = string.Format("{0:0}", Trieu) + " Tr";
+                                                            String Format_Nghin = string.Format("{0:0.0}", Nghin) + " N";
+                                                        }
+                                                        @if (Trieu >= 1)
+                                                        {
+                                                            @Format_Trieu
+                                                        }
+                                                        else if (Nghin >= 1)
+                                                        {
+                                                            @Format_Nghin
+                                                        }
+                                                        else
+                                                        {
+                                                            @item.LuotView
+                                                        }
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>	<!-- End of /.caption -->
+                                    </div>
+                                } <!-- End of /.thumbnail -->
+                            </div>	<!-- End of /.col-sm-6 col-md-4 -->
+                            <div class="col-sm-3 card-body">
+                                @foreach (var item in ViewBag.ListNews)
+                                {
+                                    <div class="thumbnail card">
+                                        <a class="catagotie-head" href="@Url.Action("BaiViet","TinTuc", new {id = item.ID})">
+
+                                            <h7>@item.TieuDe</h7>
+                                        </a>
+                                        <div class="caption">
+                                            <p class="ngat-dong">@item.MoTa</p>
+                                            <div class="row">
+                                                <div class="col-sm-5">
+                                                    <p>
+                                                        <a href="@Url.Action("BaiViet","TinTuc", new {id = item.ID})" class="btn btn-default btn-transparent" role="button">
+                                                            <span>Xem thêm</span>
+                                                        </a>
+                                                    </p>
+                                                </div>
+                                                <div class="col-sm-7" style="margin-top:7px">
+                                                    <i class="fa fa-eye" aria-hidden="true"></i>
+                                                    @{
+                                                        Nghin = (double?)item.LuotView / 1000;
+                                                        Trieu = (int?)item.LuotView / 1000000;
+                                                        String Format_Trieu = string.Format("{0:0}", Trieu) + " Tr";
+                                                        String Format_Nghin = string.Format("{0:0.0}", Nghin) + " N";
+                                                    }
+                                                    @if (Trieu >= 1)
+                                                    {
+                                                        @Format_Trieu
+                                                    }
+                                                    else if (Nghin >= 1)
+                                                    {
+                                                        @Format_Nghin
+                                                    }
+                                                    else
+                                                    {
+                                                        @item.LuotView
+                                                    }
+                                                </div>
+                                            </div>
+                                        </div>	<!-- End of /.caption -->
+                                    </div> <!-- End of /.thumbnail -->
+                                }
+                            </div>	<!-- End of /.col-sm-6 col-md-4 -->
+                        </div>
+                    </div>	<!-- End of /.row -->
+                </div>	<!-- End of /.block -->
+            </div>	<!-- End of /.col-md-12 -->
+        </div>	<!-- End of /.row -->
+    </div>	<!-- End of /.container -->
+</section>	<!-- End of Section -->
+
+<section id="catagorie">
+    <div class="container  ">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="block">
+                    <div class="block-heading">
+                        <h2>HOẠT ĐỘNG</h2>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="col-sm-9">
+                                @foreach (var item in ListHDFirst)
+                                {
+
+                                    <div class="thumbnail">
+                                        <a class="catagotie-head" href="@Url.Action("BaiViet", "HoatDongs", new { id = item.ID })">
+                                            <img src="@item.HinhAnhBaiViet" style="max-height:400px;max-width:800px" alt="...">
+                                            <h5 style="color:#4288CA">@item.Ten</h5>
+                                        </a>
+                                        <div class="caption">
+                                            <p class="ngat-dong">@item.MoTa</p>
+                                            <div class="row">   
+                                                <div class="col-sm-9">
+                                                    <p>
+                                                        <a href="@Url.Action("BaiViet", "HoatDongs", new { id = item.ID })" class="btn btn-default btn-transparent" role="button">
+                                                            <span>Xem thêm</span>
+                                                        </a>
+                                                    </p>
+                                                </div>
+                                                <div class="col-sm-3">
+                                                    <div class="blog-post-tag">
+                                                        <i class="fa fa-clock-o"></i>
+                                                        @item.NgayDang.ToShortDateString()
+                                                        <i class="fa fa-eye" style="padding-left:10px" aria-hidden="true"></i>
+                                                        @{
+                                                            Nghin = (double?)item.LuotView / 1000;
+                                                            Trieu = (int?)item.LuotView / 1000000;
+                                                            String Format_Trieu = string.Format("{0:0}", Trieu) + " Tr";
+                                                            String Format_Nghin = string.Format("{0:0.0}", Nghin) + " N";
+                                                        }
+                                                        @if (Trieu >= 1)
+                                                        {
+                                                            @Format_Trieu
+                                                        }
+                                                        else if (Nghin >= 1)
+                                                        {
+                                                            @Format_Nghin
+                                                        }
+                                                        else
+                                                        {
+                                                            @item.LuotView
+                                                        }
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>  <!-- End of /.caption -->
+                                    </div>
+                                } <!-- End of /.thumbnail -->
+                            </div>	<!-- End of /.col-sm-6 col-md-4 -->
+                            <div class="col-sm-3 card-body">
+                                @foreach (var item in ViewBag.ListHD)
+                                {
+                                    <div class="thumbnail card">
+                                        <a class="catagotie-head" href="@Url.Action("BaiViet","HoatDongs", new {id = item.ID})">
+                                            <h7>@item.Ten</h7>
+                                        </a>
+                                        <div class="caption">
+                                            <p class="ngat-dong">@item.MoTa</p>
+                                            <div class="row">
+                                                <div class="col-sm-5">
+                                                    <p>
+                                                        <a href="@Url.Action("BaiViet","HoatDongs", new {id = item.ID})" class="btn btn-default btn-transparent" role="button">
+                                                            <span>Xem thêm</span>
+                                                        </a>
+                                                    </p>
+                                                </div>
+                                                <div class="col-sm-7" style="margin-top:7px">
+                                                    <i class="fa fa-eye" aria-hidden="true"></i>
+                                                    @{
+                                                        Nghin = (double?)item.LuotView / 1000;
+                                                        Trieu = (int?)item.LuotView / 1000000;
+                                                        String Format_Trieu = string.Format("{0:0}", Trieu) + " Tr";
+                                                        String Format_Nghin = string.Format("{0:0.0}", Nghin) + " N";
+                                                    }
+                                                    @if (Trieu >= 1)
+                                                    {
+                                                        @Format_Trieu
+                                                    }
+                                                    else if (Nghin >= 1)
+                                                    {
+                                                        @Format_Nghin
+                                                    }
+                                                    else
+                                                    {
+                                                        @item.LuotView
+                                                    }
+                                                </div>
+                                            </div>
+                                        </div>	<!-- End of /.caption -->
+                                    </div> <!-- End of /.thumbnail -->
+                                }
+                            </div>	<!-- End of /.col-sm-6 col-md-4 -->
+                        </div>
+                    </div>	<!-- End of /.row -->
+                </div>	<!-- End of /.block -->
+            </div>	<!-- End of /.col-md-12 -->
+        </div>	<!-- End of /.row -->
+    </div>	<!-- End of /.container -->
+</section>	<!-- End of Section -->
+
+<section id="catagorie">
+    <div class="container  ">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="block">
+                    <div class="block-heading">
+                        <h2>ALBUMS</h2>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            @foreach (var item in ListAlbums)
+                            {
+                                <div class="col-lg-4 py-3">
+                                    <div class="gallery-style">
+                                        <a class="catagotie-head" data-lightbox="mygallery" href="@item.HinhAnh">
+                                            <img src="@item.HinhAnh">
+                                        </a>	<!-- End of /.caption -->
+                                    </div> <!-- End of /.thumbnail -->
+                                </div>
+                            }<!-- End of /.col-sm-6 col-md-4 -->
+                        </div>
+                    </div>
+                    <div class="text-center" style="margin-top:2%;">
+                            <a href="@Url.Action("Index","Albums")" class="btn btn-default btn-transparent" style="width: 150px; height: 50px; font-size: 25px; border-radius: 10px; " role="button">
+                                <span>Xem thêm</span>
+                            </a>
+                    </div>
+                        <!-- End of /.row -->
+                    </div>	<!-- End of /.block -->
+            </div>	<!-- End of /.col-md-12 -->
+        </div>	<!-- End of /.row -->
+    </div>	<!-- End of /.container -->
+</section>
+
+<section id="catagorie">
+    <div class="container  ">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="block">
+                    <div class="block-heading">
+                        <h2>ĐỐI TÁC DOANH NGHIỆP</h2>
+                    </div>
+                </div>	<!-- End of /.block -->
+                <div id="owl-example" class="owl-carousel">
+                    <div> <img src="~/Areas/Customer/Resource/images/company-1.png" alt=""></div>
+                    <div> <img src="~/Areas/Customer/Resource/images/company-2.png" alt=""></div>
+                    <div> <img src="~/Areas/Customer/Resource/images/company-3.png" alt=""></div>
+                    <div> <img src="~/Areas/Customer/Resource/images/company-4.png" alt=""></div>
+                    <div> <img src="~/Areas/Customer/Resource/images/company-5.png" alt=""></div>
+                    <div> <img src="~/Areas/Customer/Resource/images/company-6.png" alt=""></div>
+                    <div> <img src="~/Areas/Customer/Resource/images/company-8.png" alt=""></div>
+                    <div> <img src="~/Areas/Customer/Resource/images/company-9.png" alt=""></div>
+                </div>	<!-- End of /.Owl-Slider -->
+            </div>	<!-- End of /.col-md-12 -->
+        </div> <!-- End Of /.Row -->
+    </div> <!-- End Of /.Container -->
+</section>	<!-- End of Section -->

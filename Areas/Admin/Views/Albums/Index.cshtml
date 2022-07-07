@@ -1,0 +1,61 @@
+﻿@model IEnumerable<ClubPortalMS.ViewModel.Album.AlbumViewModel>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="content-wrapper">
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class="m-0">Albums</h1>
+                </div><!-- /.col -->
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="#">Trang chủ</a></li>
+                        <li class="breadcrumb-item active">Albums</li>
+                    </ol>
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
+    </div>
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="row">
+                                    <div class=" col-sm-9">
+                                        <h3 class="card-title">Quản lý albums</h3>
+                                    </div>
+                                    <div class=" col-sm-3">
+                                            <a class="btn btn-info btn-block btn-flat" style="border-radius: 4px;" type="button" href="@Url.Action("Create")">
+                                                <i class="fa fa-plus-square" aria-hidden="true"></i> Thêm ảnh mới
+                                            </a>
+                                    </div>
+                            </div>
+                        </div>
+
+                            <!-- /.card-header -->
+                            <div class="card-body">
+                                <div class="row">
+                                        @foreach (var item in Model)
+                                        {
+                                            <div class="col-lg-4 col-8">
+                                                <a href="@Url.Action("Details", new { id = item.ID })">
+                                                    <img src="@Url.Content(item.HinhAnh)" style="max-width: 100%; max-height: 100%; margin: 10px; border-radius: 15px " />
+                                                </a>
+                                            </div>
+                                        }
+                                </div>
+                            </div>
+                        </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

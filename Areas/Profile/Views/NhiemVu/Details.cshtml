@@ -1,0 +1,165 @@
+﻿@model ClubPortalMS.Models.NhiemVu_ThanhVien
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Profile/Views/Shared/_LayoutProfile.cshtml";
+    DateTime FinishTime = Model.NhiemVu.ThoiGianKetThuc;
+    int result = DateTime.Compare(FinishTime, DateTime.Now);
+}
+<div class="header-advance-area-style" style="margin-top:3%">
+    <div class="breadcome-area">
+        <div class="container-fluids">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="breadcome-list single-page-breadcome">
+                        <div class="row">
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                <div class="breadcome-heading">
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                <ul class="breadcome-menu">
+                                    <li>
+                                        <a href="#">Trang chủ</a> <span class="bread-slash">/</span>
+                                    </li>
+                                    <li>
+                                        <span class="bread-blod">Quản lý Lịch hoạt động</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="x-editable-area mg-b-15">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="x-editable-list" style="height:500px">
+                    <div class="alert-title">
+                        <h2>Thông tin chi tiết</h2>
+                    </div>
+                    @using (Html.BeginForm(null, null, System.Web.Mvc.FormMethod.Post, new { enctype = "multipart/form-data" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <table id="user" class="table table-bordered table-striped x-editor-custom">
+                            @Html.HiddenFor(model => model.IdNv)
+                            <tbody>
+                                <tr>
+                                    <td>Tiêu đề</td>
+                                    <td>
+                                        <a href="#" id="username" data-type="text" data-pk="1"> @Html.DisplayFor(model => model.NhiemVu.TieuDe)</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Mô tả</td>
+                                    <td>
+                                        <a href="#" id="username" data-type="text" data-pk="1"> @Html.DisplayFor(model => model.NhiemVu.MoTa)</a>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>Thời gian kết thúc</td>
+                                    <td>
+                                        <a href="#" id="firstname" data-type="text" data-pk="1" data-placement="right" data-placeholder="Required"> @Html.DisplayFor(model => model.NhiemVu.ThoiGianKetThuc)</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>File mô tả nhiệm vụ</td>
+                                    <td>
+                                        <a href="@Url.Action("DocumentDownloadFileDinhKem", new { id = Model.IdNv })" id="firstname" data-type="text" data-pk="1" data-placement="right" data-placeholder="Required" > @Html.DisplayFor(model => model.NhiemVu.TenFile)</a>
+                                    </td>
+                                </tr>
+
+                                @{
+                                    if (result > 0)
+                                    {
+                                        <tr>
+                                            <td>Ghi chú</td>
+                                            <td>
+                                                @Html.EditorFor(model => model.GhiChu, new { htmlAttributes = new { @class = "form-control" } })
+                                                @Html.ValidationMessageFor(model => model.GhiChu, "", new { @class = "text-danger" })
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                File bài làm:
+                                            </td>
+                                            @if (Model.FileNop == null)
+                                            {
+
+                                                <td>
+                                                    <div class="form-group">
+                                                        
+                                                        <div class="col-md-10">
+                                                            <input type="file" id="upload" name="upload" />
+                                                            @Html.ValidationMessageFor(model => model.FileNop, "", new { @class = "text-danger" })
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            }
+                                            else
+                                            {
+                                                <td>
+                                                    <a href=@Url.Action("DocumentDownload", new { id = Model.ID })>@Model.TenFileNop</a>
+                                                    <p>Tải lên file khác(Thay thế file ở trên):</p>
+                                                    <input type="file" id="upload" name="upload" />
+                                                    @Html.ValidationMessageFor(model => model.FileNop, "", new { @class = "text-danger" })
+                                                </td>
+                                            }
+                                        </tr>
+
+                                    }
+                                    else
+                                    {
+                                        <tr>
+                                            <td>Ghi chú</td>
+                                            <td>
+                                                @Html.EditorFor(model => model.GhiChu, new { htmlAttributes = new { @class = "form-control", disabled = "disabled", title = "Hết thời gian nộp bài" } })
+                                                @Html.ValidationMessageFor(model => model.GhiChu, "", new { @class = "text-danger" })
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                File bài làm:
+                                            </td>
+                                            @if (Model.FileNop == null)
+                                            {
+                                                <td>
+                                                    <div class="form-group">
+                                                        <div class="col-md-10">
+                                                            <p>Chưa nộp bài</p>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            }
+                                            else
+                                            {
+                                                <td>
+                                                    <a href=@Url.Action("DocumentDownload", "NhiemVu", new { id = Model.ID })>@Model.TenFileNop</a>
+                                                </td>
+                                            }
+                                        </tr>
+                                    }
+                                }
+                            </tbody>
+                        </table>
+                        <div style="float: right;margin-top:2%">
+                            @if (result > 0)
+                            {
+                            <button data-bs-toggle=" tooltip" title="Nộp bài" class="btn btn-primary" type="submit"><i style="font-size:15px" class="fa fa-pencil-square" aria-hidden="true"><b> Lưu</b></i></button>
+                            }
+                            else
+                            {
+                            <button data-bs-toggle=" tooltip" title="Hết thời gian nộp bài" disabled="disabled" class="btn btn-danger" type="submit"><i style="font-size:15px" class="fa fa-pencil-square" aria-hidden="true"> Lưu</i></button>
+                            }
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

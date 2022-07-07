@@ -1,0 +1,106 @@
+﻿@model IEnumerable<ClubPortalMS.ViewModel.LienHe.LienHeViewModel>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper my-2">
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class="m-0">Liên hệ</h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="#">Trang chủ</a></li>
+                        <li class="breadcrumb-item active">Liên hệ</li>
+                    </ol>
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
+    </div>
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Quản lý liên hệ</h3>
+                        </div>
+
+                        <!-- /.card-header -->
+                        <div class="card-body">
+                            <table id="table1" class="table table-bordered table-striped">
+
+                                <thead>
+                                    <tr>
+                                        <th>Tiêu đề</th>
+                                        <th>Họ và tên</th>
+                                        <th>Địa chỉ</th>
+                                        <th>Số điện thoại</th>
+                                        <th>Email</th>
+                                        <th>Đã xử lý</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model)
+                                    {
+
+                                    <tr>
+
+                                        <td>
+                                            <a href="@Url.Action("Details", new { id = item.ID })">
+                                                @item.TieuDe
+                                            </a>
+                                        </td>
+                                        <td>
+                                            <a href="@Url.Action("Details", new { id = item.ID })">
+                                                @item.Ten
+                                            </a>
+                                        </td>
+
+                                        <td>
+                                            @item.DiaChi
+                                        </td>
+
+                                        <td>
+                                            @item.HotLine
+                                        </td>
+                                        <td>
+                                            @item.Email
+                                        </td>
+                                        <td style="text-align: center;font-size:30px;color:#007BFF">
+                                            @if (item.HoanThanh == false || item.HoanThanh == null)
+                                            {
+                                            <i class="fa fa-window-close" aria-hidden="true"></i>
+                                            }
+                                            else if(item.HoanThanh == true)
+                                            {                                            
+                                            <i class="fa fa-check-square" aria-hidden="true"></i>
+                                            }
+                                        </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <th>Tiêu đề</th>
+                                        <th>Họ và tên</th>
+                                        <th>Địa chỉ</th>
+                                        <th>Số điện thoại</th>
+                                        <th>Email</th>
+                                        <th>Đã xử lý</th>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

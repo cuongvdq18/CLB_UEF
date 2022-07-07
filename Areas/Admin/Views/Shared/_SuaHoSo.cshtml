@@ -1,0 +1,13 @@
+﻿
+@using Microsoft.AspNet.Identity
+@if (Request.IsAuthenticated)
+{
+    int getID = Convert.ToInt32(@Session["UserId"]);
+    //bool isParsable = Int32.TryParse(@Session["UserId"], out getID);
+    <i class="nav-icon fas fa-copy"></i>
+    @Html.ActionLink("Hồ Sơ", "Details", "ThongTinTV", new { id = getID }, null);
+}
+else
+{
+    <p>Bạn cần đăng nhập</p>
+}

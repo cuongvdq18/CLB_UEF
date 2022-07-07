@@ -1,0 +1,117 @@
+﻿@model ClubPortalMS.Models.ThanhVien
+
+@{
+    ViewBag.Title = "XemChiTietTV";
+    Layout = "~/Areas/Profile/Views/Shared/_LayoutProfile.cshtml";
+    int id1 = 0;
+}
+
+<div class="header-advance-area-style" style="margin-top:3%">
+    <div class="breadcome-area">
+        <div class="container-fluids">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="breadcome-list single-page-breadcome">
+                        <div class="row">
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                <div class="breadcome-heading">
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                <ul class="breadcome-menu">
+                                    <li>
+                                        <a href="#">Trang chủ</a> <span class="bread-slash">/</span>
+                                    </li>
+                                    <li>
+                                        <span class="bread-blod">Quản lý thành viên</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="x-editable-area mg-b-15">
+    <div class="container-fluid">
+        <div class="alert-title">
+            <h2>Thông tin thành viên</h2>
+        </div>
+        <div class="row">
+            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                <div class="profile-info-inner">
+                    <div class="profile-img">
+                        <img src="@Model.HinhDaiDien" alt="" />
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                <div class="x-editable-list" style="height:280px">
+
+                    <table id="user" class="table table-bordered table-striped x-editor-custom" >
+                        <tbody>
+                            <tr>
+                                <td>Họ và tên</td>
+                                <td>
+                                    <a href="#" id="username" data-type="text" data-pk="1" data-title="Enter username">@Html.DisplayFor(model => model.Ho)  @Html.DisplayFor(model => model.Ten)</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Ngày sinh</td>
+                                <td>
+                                    <a href="#" id="firstname" data-type="text" data-pk="1" data-placement="right" data-placeholder="Required" data-title="Enter your firstname"> @Html.DisplayFor(model => model.NgaySinh)</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Mã số sinh viên</td>
+                                <td>
+                                    <a href="#" id="status" data-type="select" data-pk="1" data-value=""> @Html.DisplayFor(model => model.MSSV)</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Lớp</td>
+                                <td>
+                                    <a href="#" id="group" data-type="select" data-pk="1" data-value="5"> @Html.DisplayFor(model => model.Lop)</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Số điện thoại</td>
+                                <td>
+                                    <a href="#" id="status" data-pk="1" data-value="0"> @Html.DisplayFor(model => model.SDT)</a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div style="float: right;margin-top:2%">
+                        <a class="btn btn-danger" data-toggle="modal" data-target="#DangerModalalert"><i style="font-size:15px;" class="fa fa-trash" aria-hidden="true"></i>  Loại trừ</a>
+                    </div>
+                    @*@Html.ActionLink("Quay Lại", "QuanLyThanhVien", new { id =  })*@
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal here -->
+<div id="DangerModalalert" class="modal modal-edu-general FullColor-popup-DangerModal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-close-area modal-close-df">
+                <a class="close" data-dismiss="modal" href="#"><i class="fa fa-close"></i></a>
+            </div>
+            <div class="modal-body">
+                <span class="educate-icon educate-danger modal-check-pro information-icon-pro"></span>
+                <h2>Cẩn thận!</h2>
+                <p>Việc này sẽ xóa phản hồi này vĩnh viễn!!!</p>
+            </div>
+            <div class="modal-footer danger-md">
+                <a data-dismiss="modal" href="#">Hủy bỏ</a>
+                <a style="background-color:red" href="@Url.Action("LoaiTruThanhVien", new {id = @Model.ID })">Loại trừ!!</a>
+            </div>
+        </div>
+    </div>
+</div>

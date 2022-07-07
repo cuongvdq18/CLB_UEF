@@ -1,0 +1,16 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Profile/Views/Shared/_LayoutProfile.cshtml";
+}
+
+@if (Request.IsAuthenticated)
+{
+    <div style="margin-top:7%">
+        <div style="margin:auto; text-align:center">
+            <h3>Chào mừng bạn đã đến với Câu lạc bộ của trường Đại học UEF</h3>
+            <img src="~/Areas/Admin/Resource/HinhAnh/hero-img.png">
+        </div>
+    </div>
+    
+}

@@ -1,0 +1,85 @@
+﻿@model ClubPortalMS.Models.NhiemVu
+
+@{
+    ViewBag.Title = "Quản lý nhiệm vụ";
+    Layout = "~/Areas/Profile/Views/Shared/_LayoutProfile.cshtml";
+}
+<section class="content-header" style="background-color: cornflowerblue">
+    <div class="container-fluid">
+        <div class="card-header p-2">
+            <h5> Xóa lịch tập</h5>
+        </div>
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>Quản lý nhiệm vụ</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li style="color:black" class="breadcrumb-item">Trang Chủ</li>
+                    <li style="color:black" class="breadcrumb-item active">Quản lý nhiệm vụ</li>
+                </ol>
+            </div>
+        </div>
+    </div><!-- /.container-fluid -->
+</section>
+
+<section class="content">
+    <div class="container-fluid">
+        <div class="card-header p-2">
+            <h5> Xóa Nhiệm vụ</h5>
+        </div>
+        <div class="row" style="margin:2% 0 2% 0">
+            <div class="card card-primary" style="margin:auto;">
+                <div class="card-body">
+                    <h3 class="form-control alert-danger">Bạn có chắc chắn muốn xóa? Khi hoàn thành xóa thì dữ liệu sẽ không thể khôi phục!!</h3>
+                    <div class="table-responsive ">
+                        <table class="table">
+                            <tr>
+                                <th style="width:50%">Tiêu đề:</th>
+                                <td class="details-profile"> @Html.DisplayFor(model => model.TieuDe)</td>
+                            </tr>
+                            <tr>
+                                <th>Mô tả:</th>
+                                <td class="details-profile"> @Html.DisplayFor(model => model.MoTa)</td>
+                            </tr>
+
+                            <tr>
+                                <th>Thời gian kết thúc</th>
+                                <td class="details-profile"> @Html.DisplayFor(model => model.ThoiGianKetThuc)</td>
+                            </tr>
+                            @if (Model.File == null)
+                            {
+                                <tr>
+                                    <th>File đính kèm:</th>
+                                    <td class="details-profile"> Trống</td>
+                                </tr>
+
+                            }
+                            else
+                            {
+                                <tr>
+                                    <th>File đính kèm:</th>
+                                    <td class="details-profile"> @Html.DisplayFor(model => model.TenFile)</td>
+                                </tr>
+                            }
+
+                        </table>
+
+                    </div>
+                    @using (Html.BeginForm())
+                    {
+                        @Html.AntiForgeryToken()
+                        <div class="row no-print">
+                            <div class="col-12">
+                                <input type="submit" value="Xác nhận xóa" style="float:right" class="btn btn-danger" />
+                            </div>
+                        </div>
+                    }
+                    @Html.ActionLink("Quay lại", "XemNV", new { id = Model.ID })
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>
+

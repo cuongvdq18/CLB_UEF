@@ -1,0 +1,120 @@
+﻿
+@using PagedList.Mvc;
+@using PagedList;
+
+@{
+    ViewBag.Title = "Sự kiện câu lạc bộ";
+    Layout = "~/Areas/Profile/Views/Shared/_LayoutProfile.cshtml";
+    var DsSuien = (IPagedList<ClubPortalMS.Models.SukienViewModel>)ViewBag.DsSuien;
+
+}
+<div class="header-advance-area-style" style="margin-top:3%">
+    <div class="breadcome-area">
+        <div class="container-fluids">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="breadcome-list single-page-breadcome">
+                        <div class="row">
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                <div class="breadcome-heading">
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                <ul class="breadcome-menu">
+                                    <li>
+                                        <a href="#">Trang chủ</a> <span class="bread-slash">/</span>
+                                    </li>
+                                    <li>
+                                        <span class="bread-blod">Sự kiện</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="x-editable-area mg-b-15">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="sparkline13-list">
+                    <div class="sparkline13-hd">
+                        <div class="main-sparkline13-hd">
+                            <h1><span class="table-project-n">Sự</span>  kiện</h1>
+                        </div>
+                    </div>
+
+                    <div class="sparkline13-graph">
+                        <div class="datatable-dashv1-list custom-datatable-overright">
+                            @if (ViewBag.Message != null)
+                            {
+                                <div class="alert alert-danger">
+                                    <strong>@ViewBag.Message</strong>
+                                </div>
+                            }
+                            @if (ViewBag.Messages != null)
+                            {
+                                <div class="alert alert-success">
+                                    <strong>@ViewBag.Messages</strong>
+                                </div>
+                            }
+                            <table id="table" data-toggle="table" data-pagination="true" data-search="true" data-show-columns="true" data-show-pagination-switch="true" data-show-refresh="true" data-key-events="true" data-show-toggle="true" data-resizable="true" data-cookie="true"
+                                   data-cookie-id-table="saveId" data-show-export="true" data-click-to-select="true" data-toolbar="#toolbar">
+                                <thead>
+                                    <tr>
+                                        <th data-field="state" data-checkbox="true"></th>
+                                        <th data-field="Tiêu đề" data-editable="true">Tiêu đề</th>
+                                        <th data-field="Mô tả" data-editable="true">Mô tả</th>
+                                        <th data-field="Ngày bắt đầu" data-editable="true">Ngày bắt đầu</th>
+                                        <th data-field="Ngày kết thúc" data-editable="true">Ngày kết thúc</th>
+                                        <th data-field="Địa điểm" data-editable="true">Địa điểm</th>
+                                        <th data-field="Loại sự kiện" data-editable="true">Loại sự kiện</th>
+                                        <th data-field="action">Tác vụ</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in ViewBag.DsSukien)
+                                    {
+                                        <tr class="sacss">
+                                            <td></td>
+
+                                            <td>@item.SuKien.TieuDeSK</td>
+                                            <td>@item.SuKien.MoTa</td>
+                                            <td>@item.SuKien.NgayBatDau</td>
+                                            <td>@item.SuKien.NgayKetThuc</td>
+                                            <td>@item.SuKien.DiaDiem</td>
+                                            <td>@item.SuKien.LoaiSuKien.TenLoaiSK</td>
+
+                                            <td class="datatable-ct">
+                                                <div class="button-ap-list responsive-btn">
+                                                    <div class="btn-group btn-custom-groups">
+                                                        <a class="btn btn-primary" data-bs-toggle="tooltip" title="Thông tin chi tiết" href="@Url.Action("BaiVietSKCLB", new { id = item.SuKien.ID })"><i style="font-size:15px" class="fa fa-info-circle" aria-hidden="true"></i></a>
+                                                        <a class="btn btn-info" data-bs-toggle="tooltip" title="Tham gia sự kiện" href="@Url.Action("ThamGiaSK", new { id = item.SuKien.ID })"><i style="font-size:15px" class="fa fa-sign-in" aria-hidden="true"></i></a>
+                                                    </div>
+                                                </div>
+
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                        <div style="margin-top:1%"> @Html.ActionLink("Quay lại", "SuKien_CLB")</div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+    var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+        return new bootstrap.Tooltip(tooltipTriggerEl)
+    })
+</script>

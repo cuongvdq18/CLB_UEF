@@ -1,0 +1,125 @@
+﻿@model ClubPortalMS.Models.HoatDong
+
+@{
+    ViewBag.Title = "BaiViet";
+    Layout = "~/Areas/Customer/Views/Shared/_Layout.cshtml";
+    var ListHD = (List<ClubPortalMS.Models.HoatDong>)ViewBag.ListHD;
+    var ListNews = (List<ClubPortalMS.Models.TinTuc>)ViewBag.ListNews;
+    double? Trieu = 0;
+    double? Nghin = 0;
+}
+
+<div class="page-section pt-4">
+    <div class="container">
+        <nav aria-label="Breadcrumb">
+            <ol class="breadcrumb bg-transparent mb-4">
+                <li class="breadcrumb-item"><a href=@Url.Action("Index","TrangChu")>Trang Chủ</a></li>
+                <li class="breadcrumb-item"><a href="@Url.Action("Index","HoatDongs")">Hoạt Động</a></li>
+                <li class="breadcrumb-item active" aria-current="page">@Html.DisplayFor(model => model.Ten)</li>
+            </ol>
+        </nav>
+        </div>
+</div>
+
+<section id="blog">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-9 clearfix">
+                <ul class="blog-zone">
+                    <li>
+                        <div class="blog-icon">
+                            <i class="fa  fa-pencil"></i>
+                        </div>
+                        <div class="blog-box">
+                            <img src="@Html.DisplayFor(model => model.HinhAnhBaiViet)" alt="">
+
+                            <div class="blog-post-body clearfix">
+                                <a href="#">
+                                    <h5>@Html.DisplayFor(model => model.Ten)</h5>
+                                </a>
+                                <div class="blog-post-tag">
+                                    <div class="block">
+                                        <i class="fa fa-clock-o"></i>
+                                        <p>@Model.NgayDang.ToShortDateString()</p>
+                                    </div>
+                                    <div class="block">
+                                        <i class="fa fa-user"></i>
+                                        <p>@Model.TenNguoiDang</p>
+                                    </div>
+                                    <div class="block">
+                                        <i class="fa fa-eye"></i>
+                                        <p>
+                                            @{
+                                                Nghin = (double?)Model.LuotView / 1000;
+                                                Trieu = (int?)Model.LuotView / 1000000;
+                                                String Format_Trieu = string.Format("{0:0}", Trieu) + " Tr";
+                                                String Format_Nghin = string.Format("{0:0.0}", Nghin) + " N";
+                                            }
+                                            @if (Trieu >= 1)
+                                            {
+                                                @Format_Trieu
+                                            }
+                                            else if (Nghin >= 1)
+                                            {
+                                                @Format_Nghin
+                                            }
+                                            else
+                                            {
+                                                @Model.LuotView
+                                            }
+                                        </p>
+                                    </div>
+                                </div>
+                                <p>@Model.MoTa</p>
+                                <img src="@Html.DisplayFor(model => model.HinhAnhChiTiet)" alt="">
+
+                                <div class="blog-post-body clearfix">
+                                    <p>@Model.NoiDung</p>
+                                </div>
+                            </div>
+                        </div>	<!-- End of /.blog-box -->
+                    </li>
+                </ul>
+            </div>
+
+            <div class="col-md-3">
+                <div class="blog-sidebar">
+                    <div class="block">
+                        <h4>Hoạt động mới</h4>
+                        <div class="list-group">
+                                @foreach (var item in ListHD)
+                                {
+                                    <a href="@Url.Action("BaiViet","TinTuc", new {id = item.ID})" class="list-group-item">
+                                        <img src="@item.HinhAnhBaiViet" width="232" height="120" />
+                                        <h6>@item.Ten</h6>
+                                    </a>
+                                }
+                            </div>
+                    </div>	<!-- End of /.block -->
+                    <div class="block">
+                        <h4>Tin tức mới</h4>
+                        <ul class="media-list">
+                            @foreach (var item in ListNews)
+                            {
+                                <li class="media">
+                                    <a class="pull-left" href="@Url.Action("BaiViet","HoatDongs", new {id = item.ID})">
+                                        <img class="media-object" src="@item.HinhAnhBaiViet" alt="...">
+                                    </a>
+                                    <div class="media-body">
+                                        <a href="@Url.Action("BaiViet","HoatDongs", new {id = item.ID})" class="media-heading">
+                                            @item.TieuDe
+                                        </a>
+                                        <p>@item.NgayDang</p>
+                                    </div>
+                                </li>
+                            }
+
+                        </ul>	<!-- End of /.media-list -->
+                    </div>	<!-- End of /.block -->
+                </div>	<!-- End of /.blog-sidebar -->
+            </div>	<!-- End of /.col-md-3 -->
+        </div>	<!-- End of /.row -->
+    </div>	<!-- End of /.container -->
+</section>
+
+

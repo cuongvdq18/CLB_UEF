@@ -1,0 +1,89 @@
+﻿@model ClubPortalMS.ViewModel.LienHe.LienHeViewModel
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper my-2">
+            <!-- Main content -->
+            <section class="content">
+                <!-- Default box -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <input type="submit" value="Delete" class="btn btn-default" /> |
+                                @Html.ActionLink("Back to List", "Index")
+                                <strong class="text-danger text-uppercase">Xóa</strong>
+                            </div>
+                            <div class="col-md-6 text-right">
+                                <a href="#" class="btn btn-sm btn-success">Content</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <dl class="dl-horizontal">
+                            <dt>
+                                @Html.DisplayNameFor(model => model.TieuDe)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.TieuDe)
+                            </dd>
+
+                            <dt>
+                                @Html.DisplayNameFor(model => model.DiaChi)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.DiaChi)
+                            </dd>
+
+                            <dt>
+                                @Html.DisplayNameFor(model => model.HotLine)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.HotLine)
+                            </dd>
+
+                            <dt>
+                                @Html.DisplayNameFor(model => model.Email)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.Email)
+                            </dd>
+
+                            <dt>
+                                @Html.DisplayNameFor(model => model.Ten)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.Ten)
+                            </dd>
+
+                            <dt>
+                                @Html.DisplayNameFor(model => model.NoiDung)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.NoiDung)
+                            </dd>
+
+                        </dl>
+
+                        <!-- /.card-body -->
+                    </div>
+                <!-- /.card -->
+            </section>
+            <!-- /.content -->
+        </div>
+        <!-- /.content-wrapper -->
+    }

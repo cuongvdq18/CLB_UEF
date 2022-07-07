@@ -1,0 +1,108 @@
+﻿@using PagedList.Mvc;
+@using PagedList;
+
+@{
+    ViewBag.Title = "Quản lý hoạt động";
+    Layout = "~/Areas/Profile/Views/Shared/_LayoutProfile.cshtml";
+    string[] TableHeaders = new string[] {"STT","Tiêu đề"
+                        ,"Mô tả"
+                        ,"Ngày kết thúc"
+                        ,"File đính kèm"
+                        ,"Tác vụ"
+                        };
+}
+
+<div class="header-advance-area-style" style="margin-top:3%">
+    <div class="breadcome-area">
+        <div class="container-fluids">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="breadcome-list single-page-breadcome">
+                        <div class="row">
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                <div class="breadcome-heading">
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                <ul class="breadcome-menu">
+                                    <li>
+                                        <a href="#">Trang chủ</a> <span class="bread-slash">/</span>
+                                    </li>
+                                    <li>
+                                        <span class="bread-blod">Quản lý nhiệm vụ</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="x-editable-area mg-b-15">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="sparkline13-list">
+                    <div class="sparkline13-hd">
+                        <div class="main-sparkline13-hd">
+                            <h1>Quản lý <span class="table-project-n">Nhiệm</span> Vụ</h1>
+                        </div>
+                    </div>
+
+                    <div class="sparkline13-graph">
+                        <div class="datatable-dashv1-list custom-datatable-overright">
+
+                            <table id="table" data-toggle="table" data-pagination="true" data-search="true" data-show-columns="true" data-show-pagination-switch="true" data-show-refresh="true" data-key-events="true" data-show-toggle="true" data-resizable="true" data-cookie="true"
+                                   data-cookie-id-table="saveId" data-show-export="true" data-click-to-select="true" data-toolbar="#toolbar">
+                                <thead>
+                                    <tr>
+                                        <th data-field="state" data-checkbox="true"></th>
+                                        <th data-field="Tiêu đề" data-editable="true">Tiêu đề</th>
+                                        <th data-field="Mô tả" data-editable="true">Mô tả</th>
+                                        <th data-field="Ngày hết hạn nộp" data-editable="true">Ngày hết hạn nộp</th>
+                                        <th data-field="File đính kèm" >File đính kèm</th>
+                                        <th data-field="action">Tác vụ</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in ViewBag.DsNhiemVu)
+                                    {
+                                        <tr class="sacss">
+                                            <td></td>
+                                            <td>@item.NhiemVu.TieuDe</td>
+                                            <td>@item.NhiemVu.MoTa</td>
+                                            <td>@item.NhiemVu.ThoiGianKetThuc</td>
+                                            @if (item.NhiemVu.File == null)
+                                            {
+                                                <td>Không có file đính kèm</td>
+                                            }
+                                            else
+                                            {
+                                                <td>
+                                                    <a href="@Url.Action("DocumentDownload","QuanLyNhiemVu", new { id = item.NhiemVu.ID})" class="link-black text-sm"><i class="fas fa-link mr-1"></i>>@item.NhiemVu.TenFile</a>
+                                                </td>
+                                            }
+
+                                            <td class="datatable-ct">
+                                                <div class="button-ap-list responsive-btn">
+                                                    <div class="btn-group btn-custom-groups" style="margin-left:26%">
+                                                        <a class="btn btn-primary" href="@Url.Action("XemNV", new { id = item.NhiemVu.ID })"><i style="font-size:15px" class="fa fa-info-circle" aria-hidden="true"></i></a>
+                                                    </div>
+                                                </div>
+
+                                            </td>
+                                        </tr>
+                                        }
+                                    </tbody>
+                            </table>
+                        </div>
+                        <div style="margin-top:1%"> @Html.ActionLink("Quay lại", "QLNhiemVu_CLB")</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

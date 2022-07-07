@@ -1,0 +1,48 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Customer/Views/Shared/_Layout.cshtml";
+    var ListAlbums = (List<ClubPortalMS.Models.Album>)ViewBag.ListAllAlbums;
+
+}
+
+<div class="page-banner bg-img bg-img-parallax overlay-dark" style="width:auto">
+    <div class="container h-100">
+        <div class="row justify-content-center align-items-center h-100">
+            <div class="col-lg-12">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb breadcrumb-dark bg-transparent justify-content-center py-0">
+                        <li class="breadcrumb-item"><a href="@Url.Action("Index","TrangChu")">Trang Chủ</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Albums</li>
+                    </ol>
+                </nav>
+           
+            </div>
+        </div>
+    </div>
+</div>
+
+<section id="catagorie" style="margin-bottom:5%">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="block">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            @foreach (var item in ListAlbums)
+                            {
+                                <div class="col-lg-4 py-3">
+                                    <div class="gallery-style">
+                                        <a class="catagotie-head" data-lightbox="mygallery" href="@item.HinhAnh">
+                                            <img src="@item.HinhAnh">
+                                        </a>	<!-- End of /.caption -->
+                                    </div> <!-- End of /.thumbnail -->
+                                </div>
+                            }<!-- End of /.col-sm-6 col-md-4 -->
+                        </div>
+                    </div>	<!-- End of /.row -->
+                </div>	<!-- End of /.block -->
+            </div>	<!-- End of /.col-md-12 -->
+        </div>	<!-- End of /.row -->
+    </div>	<!-- End of /.container -->
+</section>

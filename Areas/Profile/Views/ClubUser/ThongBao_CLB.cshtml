@@ -1,0 +1,93 @@
+﻿@{
+    ViewBag.Title = "Thông báo";
+    Layout = "~/Areas/Profile/Views/Shared/_LayoutProfile.cshtml";
+
+}
+
+<div class="header-advance-area-style" style="margin-top:3%">
+    <div class="breadcome-area">
+        <div class="container-fluids">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="breadcome-list single-page-breadcome">
+                        <div class="row">
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                <div class="breadcome-heading">
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                <ul class="breadcome-menu">
+                                    <li>
+                                        <a href="#">Trang chủ</a> <span class="bread-slash">/</span>
+                                    </li>
+                                    <li>
+                                        <span class="bread-blod">Thông báo</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="data-map-area mg-b-15">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="card card-primary">
+                    <div class="card-header">
+                        <h4 class="card-title">Thông báo mới nhất</h4>
+                    </div>
+                    <div class="card-body" style="background-color:white;padding:30px 30px 30px 30px;">
+                        @if (ViewBag.DsTBGanDay.Count == 0)
+                        {
+                            <p>Không có thông báo nào gần đây</p>
+                        }
+                        @foreach (var item in ViewBag.DsTBGanDay)
+                        {
+                            <strong><i class="fa fa-bookmark" aria-hidden="true"></i> @item.ThanhVien_CLB.CLB.TenCLB</strong>
+                            <p class="text-muted">
+                                <h5>@item.ThongBao.TieuDe</h5>
+                            </p>
+                            <p class="text-muted">
+                                @item.ThongBao.MoTa
+                            </p>
+                            <hr>
+                        }
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-9">
+                <div class="card">
+                    <div class="col-md-10">
+                        <h3>Thông báo</h3>
+                    </div>
+                    <div class="card-body">
+
+                        @foreach (var item in ViewBag.DsCLB)
+                        {
+                            <a href="@Url.Action("ThongBaoCLB", new { id = item.IdCLB })">
+                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12" style="margin-bottom:2%">
+                                    <div class="sparkline8-list responsive-mg-b-30">
+                                        <div class="sparkline8-hd">
+                                            <div class="main-sparkline8-hd">
+                                                <h1>@item.TenCLB</h1>
+                                            </div>
+                                        </div>
+                                        <div class="sparkline8-graph ">
+                                            <img src="@item.HinhCLB" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        }
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

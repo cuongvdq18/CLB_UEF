@@ -1,0 +1,188 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@Page.Title</title>
+    <!-- Fonts -->
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700' rel='stylesheet' type='text/css'>
+
+
+    <!-- Css -->
+    <link rel="stylesheet" href="~/Areas/Customer/Resource/css/nivo-slider.css" type="text/css" />
+    <link rel="stylesheet" href="~/Areas/Customer/Resource/css/owl.carousel.css">
+    <link rel="stylesheet" href="~/Areas/Customer/Resource/css/owl.theme.css">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="~/Areas/Customer/Resource/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/Areas/Customer/Resource/css/style.css">
+    <link rel="stylesheet" href="~/Areas/Customer/Resource/css/lightbox.min.css">
+    <link rel="stylesheet" href="~/Areas/Customer/Resource/css/responsive.css">
+
+    @RenderSection("header", required: false)
+</head>
+<body>
+
+    <section id="top">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-7">
+                </div>
+                <div class="col-md-3 clearfix" style="padding-top:0.4%">
+                    <ul class="login-cart">
+                        <li>
+                            <a href="@Url.Action("Login", "Account", new { area = "" })">
+                                <i class="fa fa-user" aria-hidden="true"></i>
+                                Đăng nhập
+                            </a>
+                        </li>
+                        <li>
+                            <a href="@Url.Action("Registration", "Account", new { area = "" })">
+                                <i class="fa fa-user-plus" aria-hidden="true"></i>
+                                Đăng ký
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-md-2">
+                    <div class="search-box">
+                        <div class="input-group">
+                            <input placeholder="Tìm kiếm" type="text" class="form-control">
+                            <span class="input-group-btn">
+                                <button class="btn btn-default" type="button"></button>
+                            </span>
+                        </div><!-- /.input-group -->
+                    </div><!-- /.search-box -->
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- LOGO Start
+    ================================================== -->
+
+    <header>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <a href="#">
+                        <img src="~/Areas/Customer/Resource/images/logo.png" width="200" height="150" alt="logo">
+                    </a>
+                </div>	<!-- End of /.col-md-12 -->
+            </div>	<!-- End of /.row -->
+        </div>	<!-- End of /.container -->
+    </header> <!-- End of /Header -->
+    <!-- MENU Start
+    ================================================== -->
+
+    <nav class="navbar navbar-default">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div> <!-- End of /.navbar-header -->
+
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav nav-main">
+                    <li class="active"><a href="@Url.Action("Index","TrangChu")">TRANG CHỦ</a></li>
+                    <li><a href="@Url.Action("Index","GioiThieu")">GIỚI THIỆU</a></li>
+                    <li><a href="@Url.Action("Index","TinTuc")">TIN TỨC</a></li>
+                    <li><a href="@Url.Action("Index","HoatDongs")">HOẠT ĐỘNG</a></li>
+                    <li><a href="@Url.Action("Index","Albums")">ALBUMS</a></li>
+                    <li class="dropdown">
+                        <a href="#">
+                            CÂU LẠC BỘ
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            @Html.Partial("_DropdownCLB")
+                        </ul>
+                    </li> <!-- End of /.dropdown -->
+                    <li><a href="@Url.Action("Create","LienHe")">LIÊN HỆ</a></li>
+
+                </ul> <!-- End of /.nav-main -->
+            </div>	<!-- /.navbar-collapse -->
+        </div>	<!-- /.container-fluid -->
+    </nav>
+
+
+    @RenderBody()
+    <!-- FOOTER Start
+    ================================================== -->
+
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="block clearfix">
+                        <a href="#">
+                            <img src="~/Areas/Customer/Resource/images/logo.png" style="max-width:210px;max-height:68px" alt="">
+                        </a>
+                        <p>
+                            Trường Đại học Kinh tế - Tài chính Thành phố Hồ Chí Minh - UEF
+                        </p>
+                        <h4 class="connect-heading">LIÊN HỆ</h4>
+                        <ul class="social-icon">
+                            <li>
+                                <a class="facebook-icon" href="#">
+                                    <i class="fa fa-facebook-official" aria-hidden="true"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="plus-icon" href="#">
+                                    <i class="fa fa-google-plus"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="twitter-icon" href="#">
+                                    <i class="fa fa-twitter"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="pinterest-icon" href="#">
+                                    <i class="fa fa-pinterest"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="linkedin-icon" href="#">
+                                    <i class="fa fa-linkedin"></i>
+                                </a>
+                            </li>
+                        </ul>	<!-- End Of /.social-icon -->
+                    </div>	<!-- End Of /.block -->
+                </div> <!-- End Of /.Col-md-4 -->
+                <div class="col-md-4">
+                    <div class="block">
+                        <h4>THÔNG TIN LIÊN HỆ</h4>
+                        <p><i class="fa  fa-map-marker"></i> <span>Địa chỉ: </span>141 - 145 Điện Biên Phủ, Phường 15, Q. Bình Thạnh, TP.HCM</p>
+                        <p> <i class="fa  fa-phone"></i> <span>Số điện thoại:</span> (028) 5422 5555 - (028) 5422 6666 </p>
+
+                        <p> <i class="fa fa-calendar" aria-hidden="true"></i> <span>Thời gian:</span> Thứ Hai - Thứ Sáu, từ 7:30 đến 17:00</p>
+
+                        <p class="mail"><i class="fa  fa-envelope"></i>Email: <span>clb@uef.edu.vn</span></p>
+                    </div>	<!-- End Of /.block -->
+                </div> <!-- End Of Col-md-3 -->
+                <div class="col-md-4">
+                    <iframe id="map-canvas" src="https://www.google.com/maps/embed?pb=!1m21!1m12!1m3!1d951.9023411872985!2d106.70335653808839!3d10.797459956290053!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m6!3e0!4m0!4m3!3m2!1d10.797392199999999!2d106.7035688!5e0!3m2!1svi!2s!4v1646196662787!5m2!1svi!2s" width="345" height="300" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                </div> <!-- End Of Col-md-3 -->
+            </div> <!-- End Of /.row -->
+        </div> <!-- End Of /.Container -->
+
+    </footer> <!-- End Of Footer -->
+    <a id="back-top" href="#"></a>
+    @RenderSection("footer", required: false)
+
+
+    <!-- jS -->
+    <script src="~/Areas/Customer/Resource/js/jquery.min.js" type="text/javascript"></script>
+    <script src="~/Areas/Customer/Resource/js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="~/Areas/Customer/Resource/js/jquery.nivo.slider.js" type="text/javascript"></script>
+    <script src="~/Areas/Customer/Resource/js/owl.carousel.min.js" type="text/javascript"></script>
+    <script src="~/Areas/Customer/Resource/js/jquery.nicescroll.js"></script>
+    <script src="~/Areas/Customer/Resource/js/jquery.scrollUp.min.js"></script>
+    <script src="~/Areas/Customer/Resource/js/main.js" type="text/javascript"></script>
+    <script src="~/Areas/Customer/Resource/js/lightbox.js" type="text/javascript"></script>
+</body>
+</html>

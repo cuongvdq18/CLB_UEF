@@ -1,0 +1,111 @@
+﻿
+@model ClubPortalMS.Models.LichTap
+
+@{
+    ViewBag.Title = "Lịch hoạt động";
+    Layout = "~/Areas/Profile/Views/Shared/_LayoutProfile.cshtml";
+}
+<div class="header-advance-area-style" style="margin-top:3%">
+    <div class="breadcome-area">
+        <div class="container-fluids">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="breadcome-list single-page-breadcome">
+                        <div class="row">
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                <div class="breadcome-heading">
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                <ul class="breadcome-menu">
+                                    <li>
+                                        <a href="#">Trang chủ</a> <span class="bread-slash">/</span>
+                                    </li>
+                                    <li>
+                                        <span class="bread-blod">Quản lý Lịch lịch hoạt động</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="x-editable-area mg-b-15">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="x-editable-list" style="height:280px">
+                    <div class="alert-title">
+                        <h2>Thông tin chi tiết</h2>
+
+                    </div>
+                    <table id="user" class="table table-bordered table-striped x-editor-custom" >
+                        <tbody>
+                            <tr>
+                                <td>Tiêu đề</td>
+                                <td>
+                                    <a href="#" id="username" data-type="text" data-pk="1" data-title="Enter username"> @Html.DisplayFor(model => model.TieuDe)</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Ngày bắt đầu</td>
+                                <td>
+                                    <a href="#" id="firstname" data-type="text" data-pk="1" data-placement="right" data-placeholder="Required" data-title="Enter your firstname"> @Html.DisplayFor(model => model.NgayBatDau)</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Ngày kết thúc</td>
+                                <td>
+                                    <a href="#" id="status" data-type="select" data-pk="1" data-value=""> @Html.DisplayFor(model => model.NgayKetThuc)</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Địa điểm</td>
+                                <td>
+                                    <a href="#" id="status" data-type="select" data-pk="1" data-value=""> @Html.DisplayFor(model => model.DiaDiem)</a>
+                                </td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                    <div style="float: right;margin-top:2%">
+                        <a class="btn btn-primary" href="@Url.Action("SuaLT", new { id = @Model.ID })"><i style="font-size:15px" class="fa fa-pencil-square" aria-hidden="true">  Chỉnh sửa</i></a>
+                        <a class="btn btn-danger" data-toggle="modal" data-target="#DangerModalalert"><i style="font-size:15px;" class="fa fa-trash" aria-hidden="true"></i>  Xóa</a>
+                    </div>
+                    <div style="margin-top:2%"> @Html.ActionLink("Quay lại", "QLLichTap", new { id = Model.IdCLB })</div>
+                   
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal here -->
+<div id="DangerModalalert" class="modal modal-edu-general FullColor-popup-DangerModal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-close-area modal-close-df">
+                <a class="close" data-dismiss="modal" href="#"><i class="fa fa-close"></i></a>
+            </div>
+            <div class="modal-body">
+                <span class="educate-icon educate-danger modal-check-pro information-icon-pro"></span>
+                <h2>Cẩn thận!</h2>
+                <p>Việc này sẽ xóa phản hồi này vĩnh viễn!!!</p>
+            </div>
+            <div class="modal-footer danger-md">
+                <a data-dismiss="modal" href="#">Hủy bỏ</a>
+                <a style="background-color:red" href="@Url.Action("XacNhanXoaLT", new {id = @Model.ID })">Xóa!!</a>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+    var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+        return new bootstrap.Tooltip(tooltipTriggerEl)
+    })
+</script>

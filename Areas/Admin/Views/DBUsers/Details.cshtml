@@ -1,0 +1,169 @@
+﻿@model ClubPortalMS.ViewModel.User.UserViewModel
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="content-wrapper">
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class="m-0">Tài khoản</h1>
+                </div><!-- /.col -->
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="#">Trang chủ</a></li>
+                        <li class="breadcrumb-item active">Tài khoản</li>
+                    </ol>
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
+    </div>
+
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Quản lý Tài khoản</h3>
+                        </div>
+
+                        <!-- /.card-header -->
+                        <div class="card-body">
+
+                            <table id="table1" class="table table-bordered table-striped">
+                                <tr>
+                                    <th>Họ và tên</th>
+                                    <td>@Html.DisplayFor(model => model.LastName) @Html.DisplayFor(model => model.FirstName)</td>
+                                </tr>
+                                <tr>
+                                    <th>tên tài khoản</th>
+                                    <td> @Html.DisplayFor(model => model.Username)</td>
+                                </tr>
+                                <tr>
+                                    <th>Email</th>
+                                    <td> @Html.DisplayFor(model => model.Email)</td>
+                                </tr>
+                                <tr>
+                                    <th>Xác thực email</th>
+                                    @if (Model.EmailConfirmation == false)
+                                    {
+                                        <td>Tài khoản chưa được xác thực Email</td>
+                                    }
+                                    else
+                                    {
+                                        <td>Tài khoản đã được xác thực Email</td>
+                                    }
+                                </tr>
+                                <tr>
+                                    <th>Trạng thái</th>
+                                    @if (Model.IsLocked == false)
+                                    {
+                                        <td>Tài khoản đang hoạt động</td>
+                                    }
+                                    else
+                                    {
+                                        <td>Tài khoản đã bị khóa</td>
+                                    }
+
+                                </tr>
+
+                                <tr>
+                                    <th>Ngày tạo</th>
+                                    @if (Model.DateCreated == null)
+                                    {
+                                        <td> </td>
+                                    }
+                                    else
+                                    {
+                                        <td>
+                                            @Model.DateCreated.Value.ToShortDateString()
+                                        </td>
+                                    }
+                                </tr>
+                            </table>
+                            <div class=" col-12">
+                                <a style="float:right" data-toggle="modal" data-target="#modal-danger" class="btn btn-app bg-danger">
+                                    <i class="fa fa-trash" aria-hidden="true"></i> Xóa
+                                </a>
+                                @if (Model.IsLocked == false)
+                                {
+                                    <a style="float:right" class="btn btn-app bg-warning" data-toggle="modal" data-target="#modal-warning1">
+                                        <i class="fa fa-lock" aria-hidden="true"></i> Khóa
+                                    </a>
+                                }
+                                else
+                                {
+                                    <a style="float:right" class="btn btn-app bg-warning" data-toggle="modal" data-target="#modal-warning2">
+                                        <i class="fa fa-unlock-alt" aria-hidden="true"></i> Mở khóa
+                                    </a>
+                                }
+                                @Html.ActionLink("Quay lại", "Index")
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div> 
+        </div>
+    </section>
+</div>
+<div class="modal fade" id="modal-danger">
+    <div class="modal-dialog">
+        <div class="modal-content bg-danger">
+            <div class="modal-header">
+                <h4 class="modal-title">Cẩn thận!!</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" style="background-color:white; color:black">
+                <p>Không thể khôi phục dữ liệu nếu đã xóa&hellip;</p>
+            </div>
+            <div class="modal-footer justify-content-between" style="background-color:white">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Hủy bỏ</button>
+                <a type="button" class="btn  btn-danger" href="@Url.Action( "DeleteConfirmed", new { id = Model.ID })">Xóa</a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="modal-warning1">
+    <div class="modal-dialog">
+        <div class="modal-content bg-warning">
+            <div class="modal-header">
+                <h4 class="modal-title">Cẩn thận!!</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" style="background-color:white; color:black">
+                <p>Bạn đang khóa tài khoản này, người dùng này sẽ không thể đăng nhập bằng tài khoản này nữa cho tới khi được mở khóa&hellip;</p>
+            </div>
+            <div class="modal-footer justify-content-between" style="background-color:white">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Hủy bỏ</button>
+                <a type="button" class="btn  btn-warning" href="@Url.Action( "KhoaTK", new { id = Model.ID })">Khóa</a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="modal-warning2">
+    <div class="modal-dialog">
+        <div class="modal-content bg-warning">
+            <div class="modal-header">
+                <h4 class="modal-title">Cẩn thận!!</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" style="background-color:white; color:black">
+                <p>Bạn đang mở khóa tài khoản này, người dùng này sẽ được đăng nhập lại và hoạt động bình thường&hellip;</p>
+            </div>
+            <div class="modal-footer justify-content-between" style="background-color:white">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Hủy bỏ</button>
+                <a type="button" class="btn  btn-warning" href="@Url.Action( "MoTK", new { id = Model.ID })">Mở khóa</a>
+            </div>
+        </div>
+    </div>
+</div>  

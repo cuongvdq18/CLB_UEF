@@ -1,0 +1,344 @@
+﻿
+<!DOCTYPE html>
+<html>
+
+
+<head>
+    <title>@Page.Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <link href="~/Areas/Admin/Resource/plugins/fontawesome-free/css/all.min.css" rel="stylesheet" />
+    <link href="~/Areas/Admin/Resource/dist/css/adminlte.css" rel="stylesheet" />
+    <link href="~/Areas/Admin/Resource/css/admincss.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/Areas/Admin/Resource/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="~/Areas/Admin/Resource/plugins/datatables-responsive/css/responsive.bootsstrap4.min.css">
+    <link rel="stylesheet" href="~/Areas/Admin/Resource/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
+    <!-- overlayScrollbars -->
+    <link rel="stylesheet" href="~/Areas/Admin/Resource/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
+    <!-- Daterange picker -->
+    <link rel="stylesheet" href="~/Areas/Admin/Resource/plugins/daterangepicker/daterangepicker.css">
+    <!-- summernote -->
+    <link rel="stylesheet" href="~/Areas/Admin/Resource/plugins/summernote/summernote-bs4.min.css">
+    <!-- JQVMap -->
+    <link rel="stylesheet" href="~/Areas/Admin/Resource/plugins/jqvmap/jqvmap.min.css">
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <!-- Tempusdominus Bootstrap 4 -->
+    <link rel="stylesheet" href="~/Areas/Admin/Resource/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
+    <!-- iCheck -->
+    <link rel="stylesheet" href="~/Areas/Admin/Resource/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+    @RenderSection("header", required: false)
+</head>
+<body class="hold-transition sidebar-mini">
+
+    <!-- Site wrapper -->
+    <div class="wrapper">
+        <!-- Navbar -->
+        <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+            <!-- Left navbar links -->
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+                </li>
+            </ul>
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item" style="margin-top:-6px">
+
+                    @Html.Partial("_LoginPartial")
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-widget="fullscreen" href="#" role="button">
+                        <i class="fas fa-expand-arrows-alt"></i>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-bs-toggle=" tooltip" title="Chuyển sang Normal Mode"  href="@Url.Action("Index", "Dashboard", new { area = "Profile" })">
+                        <i class="fa fa-arrow-left" aria-hidden="true"></i>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        <!-- /.navbar -->
+        <!-- Main Sidebar Container -->
+        <aside class="main-sidebar sidebar-dark-primary elevation-4">
+            <!-- Brand Logo -->
+            <a href="@Url.Action("Index","Trangchu")" class="brand-link">
+                <span class="brand-text font-weight-light">UEF Club Management</span>
+            </a>
+
+            <!-- Sidebar -->
+            <div class="sidebar">
+                <!-- Sidebar user (optional) -->
+                <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+                    <div class="input-group" data-widget="sidebar-search">
+                        <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search">
+                        <div class="input-group-append">
+                            <button class="btn btn-sidebar">
+                                <i class="fas fa-search fa-fw"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <nav class="mt-2">
+                    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                        <li class="nav-item">
+                            <a href="@Url.Action("Index","Trangchu")" class="nav-link">
+                                <i class="fa fa-home" aria-hidden="true"></i>
+                                <p>
+                                    &nbsp; Trang chủ
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="@Url.Action("Index","Dashboard")" class="nav-link">
+                                <i class="fas fa-chart-pie mr-1"></i>
+                                <p>
+                                    Thống kê
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="fa fa-graduation-cap" aria-hidden="true"></i>
+                                <p>
+                                    &nbsp; Quản lý CTT
+                                    <i class="fas fa-angle-left right"></i>
+                                </p>
+                            </a>
+
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="@Url.Action("Index", "Albums")" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Albums</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="@Url.Action("Index", "Posters")" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Posters</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="@Url.Action("Index", "HoatDongs")" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Hoạt Động</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="@Url.Action("Index", "TinTucs")" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Tin tức</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="@Url.Action("Index", "LienHes")" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Liên Hệ</p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+
+
+
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="fa fa-user-circle" style="font-size:20px" aria-hidden="true"></i>
+                                <p>
+                                    &nbsp; Quản lý Người dùng
+                                    <i class="fas fa-angle-left right"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="@Url.Action("Index", "VaiTro")" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Chức vụ quản trị</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="@Url.Action("Index", "DBUsers")" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Tài Khoản Người Dùng</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="@Url.Action("Index", "Khoas")" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Khoa</p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="fa fa-users" aria-hidden="true"></i>
+                                <p>
+                                    &nbsp; Câu lạc bộ
+                                    <i class="fas fa-angle-left right"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="@Url.Action("Index", "CLBs")" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Câu Lạc Bộ</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="@Url.Action("Index", "LoaiCLBs")" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Loại Câu Lạc Bộ</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="@Url.Action("Index", "LoaiHDs")" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Loại Hoạt Động</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="@Url.Action("Index", "LoaiSuKiens")" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Loại Sự Kiện</p>
+                                    </a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a href="@Url.Action("CLB_TV", "ThanhViens")" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Thành Viên</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="@Url.Action("Index", "ThongBaos")" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Thông Báo</p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="fa fa-briefcase" style="font-size:20px" aria-hidden="true"></i>
+                                <p>
+                                    &nbsp; Hoạt động CLB
+                                    <i class="fas fa-angle-left right"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="@Url.Action("Index", "NhiemVus")" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Nhiệm vụ</p>
+                                    </a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a href="@Url.Action("Index", "PhanHois")" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Phản Hồi</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="@Url.Action("Index", "QLDSHoatDongs")" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Hoạt động CLB</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="@Url.Action("Index", "LichHoatDong")" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Lịch Hoạt động</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="@Url.Action("Index", "SuKiens")" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Sự Kiện</p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+
+                    </ul>
+                </nav>
+                <!-- /.sidebar-menu -->
+            </div>
+            <!-- /.sidebar -->
+        </aside>
+
+        <div class="wrapper">
+            @RenderBody()
+        </div>
+
+    </div>
+    <script src="~/Areas/Admin/Resource/plugins/bootstrap/js/bootstrap.min.js"></script>
+    <script src="~/Areas/Admin/Resource/plugins/jquery/jquery.min.js"></script>
+    <script src="~/Areas/Admin/Resource/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- jQuery UI 1.11.4 -->
+    <script src="~/Areas/Admin/Resource/plugins/jquery-ui/jquery-ui.min.js"></script>
+    <script>
+        $.widget.bridge('uibutton', $.ui.button)
+    </script>
+    <script src="~/Areas/Admin/Resource/plugins/datatables/jquery.dataTables.min.js"></script>
+    <script src="~/Areas/Admin/Resource/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+    <script src="~/Areas/Admin/Resource/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="~/Areas/Admin/Resource/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+    <script src="~/Areas/Admin/Resource/plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
+    <script src="~/Areas/Admin/Resource/plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
+    <script src="~/Areas/Admin/Resource/plugins/jszip/jszip.min.js"></script>
+    <script src="~/Areas/Admin/Resource/plugins/pdfmake/pdfmake.min.js"></script>
+    <script src="~/Areas/Admin/Resource/plugins/pdfmake/vfs_fonts.js"></script>
+    <script src="~/Areas/Admin/Resource/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
+    <script src="~/Areas/Admin/Resource/plugins/datatables-buttons/js/buttons.print.min.js"></script>
+    <script src="~/Areas/Admin/Resource/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+    <!-- JQVMap -->
+    <script src="~/Areas/Admin/Resource/plugins/jqvmap/jquery.vmap.min.js"></script>
+    <script src="~/Areas/Admin/Resource/plugins/jqvmap/maps/jquery.vmap.usa.js"></script>
+    <!-- ChartJS -->
+    <script src="~/Areas/Admin/Resource/plugins/chart.js/Chart.bundle.min.js"></script>
+    <!-- Sparkline -->
+    <script src="~/Areas/Admin/Resource/plugins/sparklines/sparkline.js"></script>
+    <!-- jQuery Knob Chart -->
+    <script src="~/Areas/Admin/Resource/plugins/jquery-knob/jquery.knob.min.js"></script>
+    <!-- daterangepicker -->
+    <script src="~/Areas/Admin/Resource/plugins/moment/moment.min.js"></script>
+    <script src="~/Areas/Admin/Resource/plugins/daterangepicker/daterangepicker.js"></script>
+    <!-- Tempusdominus Bootstrap 4 -->
+    <script src="~/Areas/Admin/Resource/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
+    <!-- Summernote -->
+    <script src="~/Areas/Admin/Resource/plugins/summernote/summernote-bs4.min.js"></script>
+    <!-- overlayScrollbars -->
+    <script src="~/Areas/Admin/Resource/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+    <script src="~/Areas/Admin/Resource/dist/js/adminlte.js"></script>
+    <script src="~/Areas/Admin/Resource/dist/js/demo.js"></script>
+
+
+    <script>
+        $(function () {
+            $("#table1").DataTable({
+                "responsive": true, "lengthChange": false, "autoWidth": false,
+                "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+            }).buttons().container().appendTo('#table1_wrapper .col-md-6:eq(0)');
+            $('#table2').DataTable({
+                "paging": true,
+                "lengthChange": false,
+                "searching": false,
+                "ordering": true,
+                "info": true,
+                "autoWidth": false,
+                "responsive": true,
+            });
+        });
+
+            var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+            var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+            return new bootstrap.Tooltip(tooltipTriggerEl)
+            })
+    </script>
+
+</body>
+</html>

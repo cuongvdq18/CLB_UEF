@@ -1,0 +1,136 @@
+﻿@model ClubPortalMS.ViewModel.LienHe.LienHeViewModel
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper my-2">
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class="m-0">Liên hệ</h1>
+                </div><!-- /.col -->
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="#">Trang chủ</a></li>
+                        <li class="breadcrumb-item active">Liên hệ</li>
+                    </ol>
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
+    </div>
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Quản lý Liên hệ</h3>
+                        </div>
+
+                        <!-- /.card-header -->
+                        <div class="card-body">
+
+                            <table id="table1" class="table table-bordered table-striped">
+                                <tr>
+                                    <th>Tiêu đề</th>
+                                    <td>@Html.DisplayFor(model => model.TieuDe)</td>
+                                </tr>
+                                <tr>
+                                    <th>Họ và tên</th>
+                                    <td> @Html.DisplayFor(model => model.Ten)</td>
+                                </tr>
+                                <tr>
+                                    <th>Nội dung</th>
+                                    <td> @Html.DisplayFor(model => model.NoiDung)</td>
+                                </tr>
+                                <tr>
+                                    <th>Địa chỉ</th>
+                                    <td> @Html.DisplayFor(model => model.DiaChi)</td>
+                                </tr>
+                                <tr>
+                                    <th>Số điện thoại</th>
+                                    <td> @Html.DisplayFor(model => model.HotLine)</td>
+                                </tr>
+                                <tr>
+                                    <th>Email</th>
+                                    <td> @Html.DisplayFor(model => model.Email)</td>
+                                </tr>
+                                <tr>
+                                    @if (Model.HoanThanh == false || Model.HoanThanh == null)
+                                    {
+                                        <th>Đã xử lý</th>
+                                        <td><i class="fa fa-window-close" aria-hidden="true"></i></td>
+                                    }
+                                    else if(Model.HoanThanh == true)
+                                    {
+                                        <th>Đã xử lý</th>
+                                        <td> <i class="fa fa-check-square" aria-hidden="true"></i></td>
+                                    }
+                                </tr>
+                            </table>
+                            <div class=" col-12">
+                                <a style="float:right" data-toggle="modal" data-target="#modal-danger" class="btn btn-app bg-danger">
+                                    <i class="fa fa-trash" aria-hidden="true"></i> Xóa
+                                </a>@Html.ActionLink("Quay lại", "Index")
+                                    @if (Model.HoanThanh == false || Model.HoanThanh == null)
+                                    {
+                                    <a style="float:right" class="btn btn-app bg-warning" data-toggle="modal" data-target="#modal-warning2">
+                                        <i class="fa fa-check-circle" aria-hidden="true"></i> Đã xử lý
+                                    </a>
+                                    }
+                                    else if (Model.HoanThanh == true)
+                                    { }
+                                </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+<div class="modal fade" id="modal-danger">
+    <div class="modal-dialog">
+        <div class="modal-content bg-danger">
+            <div class="modal-header">
+                <h4 class="modal-title">Cẩn thận!!</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" style="background-color:white; color:black">
+                <p>Không thể khôi phục dữ liệu nếu đã xóa&hellip;</p>
+            </div>
+            <div class="modal-footer justify-content-between" style="background-color:white">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Hủy bỏ</button>
+                <a type="button" class="btn  btn-danger" href="@Url.Action( "DeleteConfirmed", new { id = Model.ID })">Xóa</a>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+
+<div class="modal fade" id="modal-warning2">
+    <div class="modal-dialog">
+        <div class="modal-content bg-warning">
+            <div class="modal-header">
+                <h4 class="modal-title">Cẩn thận!!</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" style="background-color:white; color:black">
+                <p>NẾu đã xác nhận thì không thể thay đổi!!!&hellip;</p>
+            </div>
+            <div class="modal-footer justify-content-between" style="background-color:white">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Hủy bỏ</button>
+                <a type="button" class="btn  btn-warning" href="@Url.Action( "DaXuLy", new { id = Model.ID })">Xác nhận</a>
+            </div>
+        </div>
+    </div>
+</div>  

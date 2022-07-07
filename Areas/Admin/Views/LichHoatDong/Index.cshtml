@@ -1,0 +1,87 @@
+﻿@model IEnumerable<ClubPortalMS.ViewModel.LichHoatDong.LichHoatDongViewModel>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="content-wrapper">
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class="m-0">Lịch hoạt động</h1>
+                </div><!-- /.col -->
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="#">Trang chủ</a></li>
+                        <li class="breadcrumb-item active">Lịch hoạt động</li>
+                    </ol>
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
+    </div>
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Quản lý Lịch hoạt động</h3>
+                        </div>
+
+                        <!-- /.card-header -->
+                        <div class="card-body">
+                            <table id="table1" class="table table-bordered table-striped">
+
+                                <thead>
+                                    <tr>
+                                        <th>Câu lạc bộ</th>
+                                        <th>Tiêu đề</th>
+                                        <th>Địa điểm</th>
+                                        <th>Thời gian bắt đầu</th>
+                                        <th>Thời gian kết thúc</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model)
+                                    {
+
+                                    <tr>
+                                        <td>
+                                            @item.CauLacBo
+                                        </td>
+                                        <td>
+                                            <a href="@Url.Action("Details", new { id = item.ID })">
+                                                @item.TieuDe
+                                            </a>
+                                        </td>
+                                        <td>
+                                            @item.DiaDiem
+                                        </td>
+                                        <td>
+                                            @item.NgayBatDau
+                                        </td>
+                                        <td>
+                                            @item.NgayKetThuc
+                                        </td>
+                                    </tr>
+                                    }
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <th>Câu lạc bộ</th>
+                                        <th>Tiêu đề</th>
+                                        <th>Địa điểm</th>
+                                        <th>Thời gian bắt đầu</th>
+                                        <th>Thời gian kết thúc</th>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

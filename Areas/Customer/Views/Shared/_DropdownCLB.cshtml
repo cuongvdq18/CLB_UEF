@@ -1,0 +1,12 @@
+﻿@using ClubPortalMS.Models
+
+@using (ApplicationDbContext db = new ApplicationDbContext())
+{
+    List<LoaiCLB> loaiCLB = db.LoaiCLB.ToList();
+
+    foreach (var item in loaiCLB)
+    {
+        <li><a href="@Url.Action("DsCLBtheoLoai","CLB", new { id = item.IDLoaiCLB })">@item.TenLoaiCLB</a></li>
+    }
+
+}

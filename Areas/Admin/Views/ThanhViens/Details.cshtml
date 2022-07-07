@@ -1,0 +1,114 @@
+﻿@model ClubPortalMS.ViewModel.ThanhVien.ThanhViensViewModel
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+<div class="content-wrapper">
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class="m-0">Thành Viên</h1>
+                </div><!-- /.col -->
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="#">Trang chủ</a></li>
+                        <li class="breadcrumb-item active">Thành Viên</li>
+                    </ol>
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
+    </div>
+
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Quản lý Thành Viên</h3>
+                        </div>
+
+                        <!-- /.card-header -->
+                        <div class="card-body">
+
+                            <table id="table1" class="table table-bordered table-striped">
+                                <tr>
+                                    <th>Tài khoản</th>
+                                    <td>
+                                        <a href="@Url.Action("Details","DBUsers", new { id = Model.ID })">
+                                            @Html.DisplayFor(model => model.TenTK)
+                                            </a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>Họ và tên</th>
+                                    <td>@Html.DisplayFor(model => model.Ho) @Html.DisplayFor(model => model.Ten)</td>
+                                </tr>
+                                <tr>
+                                    <th>Khoa</th>
+                                    <td> @Html.DisplayFor(model => model.Khoa)</td>
+                                </tr>
+                                <tr>
+                                    <th>Lớp</th>
+                                    <td> @Html.DisplayFor(model => model.Lop)</td>
+                                </tr>
+                                <tr>
+                                    <th>MSSV</th>
+                                    <td> @Html.DisplayFor(model => model.MSSV)</td>
+                                </tr>
+                                <tr>
+                                    <th>Số điện thoại</th>
+                                    <td> @Html.DisplayFor(model => model.SDT)</td>
+                                </tr>
+                                <tr>
+                                    <th>Email</th>
+                                    <td> @Html.DisplayFor(model => model.Mail)</td>
+                                </tr>
+                                <tr>
+                                    <th>Sinh ngày</th>
+                                    @if (Model.NgaySinh == null) { <td> </td>}
+                                    else { 
+                                    <td>  @Model.NgaySinh.Value.ToShortDateString()</td>}
+                                </tr>
+                                <tr>
+                                    <th>Ảnh đại diện</th>
+                                    <td><img src="@Url.Content(Model.HinhDaiDien)" style="max-width:600px;max-height:600px" /></td>
+                                </tr>
+                            </table>
+                            <div class=" col-12">
+                                <a style="float:right" data-toggle="modal" data-target="#modal-danger" class="btn btn-app bg-danger">
+                                    <i class="fa fa-trash" aria-hidden="true"></i> Khai trừ
+                                    @Html.ActionLink("Quay lại", "Index",new { id = ViewBag.IdCLB })
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+<div class="modal fade" id="modal-danger">
+    <div class="modal-dialog">
+        <div class="modal-content bg-danger">
+            <div class="modal-header">
+                <h4 class="modal-title">Cẩn thận!!</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" style="background-color:white; color:black">
+                <p>Việc này sẽ khai trừ thành viên này khỏi câu lạc bộ vĩnh viễn&hellip;</p>
+            </div>
+            <div class="modal-footer justify-content-between" style="background-color:white">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Hủy bỏ</button>
+                <a type="button" class="btn  btn-danger" href="@Url.Action( "DeleteConfirmed", new { id = Model.ID })">Khai trừ</a>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+

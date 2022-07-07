@@ -1,0 +1,108 @@
+﻿@model ClubPortalMS.Models.LienHe
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Areas/Customer/Views/Shared/_Layout.cshtml";
+}
+<div class="page-banner bg-img bg-img-parallax overlay-dark" >
+    <div class="container h-100">
+        <div class="row justify-content-center align-items-center h-100">
+            <div class="col-lg-12">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb breadcrumb-dark bg-transparent justify-content-center py-0">
+                        <li class="breadcrumb-item"><a href="@Url.Action("Index","TrangChu")">Trang Chủ</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Liên Hệ</li>
+                    </ol>
+                </nav>
+              
+            </div>
+        </div>
+    </div>
+</div>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="page-section">
+        <div class="container">
+            <div class="text-center">
+                <h2 class="title-section mb-3">LIÊN HỆ VỚI CHÚNG TÔI</h2>
+                <p>Hãy để lại tin nhắn bạn muốn nhắn gửi.</p>
+            </div>
+            <div class="row justify-content-center mt-5" style="margin-bottom:15px">
+                <div class="col-lg-12">
+                    <form action="#" class="form-contact">
+                        <div class="row">
+                            <div class="col-12 py-2" style="margin-top:20px">
+                                <label for="subject" class="fg-grey">Tiêu Đề</label>
+                                @Html.EditorFor(model => model.TieuDe, new { htmlAttributes = new { @class = "form-control",
+                               required = "required",
+                               oninvalid = "this.setCustomValidity('Xin vui lòng nhập Tiêu đề')",
+                               oninput = "this.setCustomValidity('')"
+                           } })
+                            </div>
+                            <div class="col-12 py-2" style="margin-top:20px">
+                                <label for="subject" class="fg-grey">Họ Và Tên</label>
+                                @Html.EditorFor(model => model.Ten, new { htmlAttributes = new { @class = "form-control",
+                               required = "required",
+                               oninvalid = "this.setCustomValidity('Xin vui lòng nhập Họ và tên')",
+                               oninput = "this.setCustomValidity('')"
+                           } })
+                            </div>
+                            <div class="row" style="margin-top:20px">
+                                <div class="col-lg-6 py-2">
+                                    <label for="name" class="fg-grey">Số Điện Thoại</label>
+                                    @Html.EditorFor(model => model.HotLine, new { htmlAttributes = new { @class = "form-control",
+                                   required = "required",
+                                   oninvalid = "this.setCustomValidity('Xin vui lòng nhập số điện thoại')",
+                                   oninput = "this.setCustomValidity('')"
+                               } })
+                                </div>
+                                <div class="col-lg-6 py-2">
+                                    <label for="email" class="fg-grey">Email</label>
+                                    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control",type="email",
+                                   required = "required",
+                                   oninvalid = "this.setCustomValidity('Xin vui lòng nhập email')",
+                                   oninput = "this.setCustomValidity('')"
+                               } })
+                                </div>
+                            </div>
+                            <div class="col-12 py-2" style="margin-top:20px">
+                                <label for="subject" class="fg-grey">Địa Chỉ</label>
+                                @Html.EditorFor(model => model.DiaChi, new { htmlAttributes = new { @class = "form-control",
+                               required = "required",
+                               oninvalid = "this.setCustomValidity('Xin vui lòng nhập địa chỉ')",
+                               oninput = "this.setCustomValidity('')"
+                           } })
+                            </div>
+                            <div class="col-12 py-2" style="margin-top:20px">
+                                <label for="message" class="fg-grey">Nội Dung Muốn Gưỉ Đến Chúng Tôi</label>
+                                    @Html.EditorFor(model => model.NoiDung, new
+                               {
+                                   htmlAttributes = new
+                                   {
+                                       @class = "form-control",
+                                       type = "textarea",
+                                       @row = "12",
+                                       required = "required",
+                                       oninvalid = "this.setCustomValidity('Xin vui lòng nhập nội dung')",
+                                       oninput = "this.setCustomValidity('')"
+                                   }
+                               })
+      
+                            </div>
+                            <div class="col-12 mt-3" style="margin-top:20px">
+                                <input type="submit" value="Xác Nhận" class="btn btn-primary px-5">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div> <!-- .container -->
+    </div>
+}
+<div class="maps-container">
+    <div id="google-maps">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15676.726122219461!2d106.7035663!3d10.7974046!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x73084dd08a9fe5a4!2zVHLGsOG7nW5nIMSQ4bqhaSBo4buNYyBLaW5oIHThur8gVMOgaSBjaMOtbmggVFAuSENN!5e0!3m2!1svi!2s!4v1637748899138!5m2!1svi!2s" width="1530" height="400" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+    </div>
+</div>

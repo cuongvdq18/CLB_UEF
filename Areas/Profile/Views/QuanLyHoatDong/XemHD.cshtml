@@ -1,0 +1,139 @@
+﻿@model ClubPortalMS.Models.QLDSHoatDong
+
+@{
+    ViewBag.Title = "Hoạt động";
+    Layout = "~/Areas/Profile/Views/Shared/_LayoutProfile.cshtml";
+}
+<div class="header-advance-area-style" style="margin-top:3%">
+    <div class="breadcome-area">
+        <div class="container-fluids">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="breadcome-list single-page-breadcome">
+                        <div class="row">
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                <div class="breadcome-heading">
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                <ul class="breadcome-menu">
+                                    <li>
+                                        <a href="#">Trang chủ</a> <span class="bread-slash">/</span>
+                                    </li>
+                                    <li>
+                                        <span class="bread-blod">Quản lý Lịch hoạt động</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="x-editable-area mg-b-15">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="x-editable-list" style="height:600px">
+                    <div class="alert-title">
+                        <h2>Thông tin chi tiết</h2>
+
+                    </div>
+                    <table id="user" class="table table-bordered table-striped x-editor-custom">
+                        <tbody>
+                            <tr>
+                                <td>Tiêu đề</td>
+                                <td>
+                                    <a href="#" id="username" data-type="text" data-pk="1" > @Html.DisplayFor(model => model.ChuDe)</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Mô tả</td>
+                                <td>
+                                    <a href="#" id="username" data-type="text" data-pk="1" > @Html.DisplayFor(model => model.Mota)</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Nội dung</td>
+                                <td>
+                                    <a href="#" id="username" data-type="text" data-pk="1" > @Html.DisplayFor(model => model.NoiDung)</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Ngày bắt đầu</td>
+                                <td>
+                                    <a href="#" id="firstname" data-type="text" data-pk="1" data-placement="right" data-placeholder="Required" data-title="Enter your firstname"> @Html.DisplayFor(model => model.NgayBatDau)</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Ngày kết thúc</td>
+                                <td>
+                                    <a href="#" id="status" data-type="select" data-pk="1" data-value=""> @Html.DisplayFor(model => model.NgayKetThuc)</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Địa điểm</td>
+                                <td>
+                                    <a href="#" id="status" data-type="select" data-pk="1" data-value=""> @Html.DisplayFor(model => model.DiaDiem)</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Loại hoạt động</td>
+                                <td>
+                                    <a href="#" id="status" data-type="select" data-pk="1" data-value=""> @Html.DisplayFor(model => model.LoaiHD.TenLoaiHD)</a>
+                                </td>
+                            </tr>
+
+                            @if (Model.File == null)
+                            {
+                                <tr>
+                                    <th>File đính kèm:</th>
+                                    <td class="details-profile"> Trống</td>
+                                </tr>
+                            }
+                            else
+                            {
+                                <tr>
+                                    <td>File đính kèm</td>
+                                    <td>
+                                        <a href="@Url.Action("DocumentDownload","QuanLyHoatDong", new { id = Model.ID})" id="status" data-type="select" data-pk="1" data-value=""> @Html.DisplayFor(model => model.TenFile)</a>
+                                    </td>
+                                </tr>
+                            }
+
+                        </tbody>
+                    </table>
+                    <div style="float: right;margin-top:2%">
+                        <a class="btn btn-info" href="@Url.Action("DiemDanh", new { id = Model.ID ,id2=Model.CLB.ID})"><i style="font-size:15px" class="fa fa-file-text-o" aria-hidden="true">  Điểm danh</i></a>
+                        <a class="btn btn-primary" href="@Url.Action("SuaHD", new { id = @Model.ID })"><i style="font-size:15px" class="fa fa-pencil-square" aria-hidden="true">  Chỉnh sửa</i></a>
+                        <a class="btn btn-danger" data-toggle="modal" data-target="#DangerModalalert"><i style="font-size:15px;" class="fa fa-trash" aria-hidden="true"></i>  Xóa</a>
+                    </div>
+                    <div style="margin-top:2%"> @Html.ActionLink("Quay lại", "QLHoatDong", new { id = Model.IdCLB })</div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal here -->
+<div id="DangerModalalert" class="modal modal-edu-general FullColor-popup-DangerModal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-close-area modal-close-df">
+                <a class="close" data-dismiss="modal" href="#"><i class="fa fa-close"></i></a>
+            </div>
+            <div class="modal-body">
+                <span class="educate-icon educate-danger modal-check-pro information-icon-pro"></span>
+                <h2>Cẩn thận!</h2>
+                <p>Việc này sẽ xóa hoạt động này vĩnh viễn!!!</p>
+            </div>
+            <div class="modal-footer danger-md">
+                <a data-dismiss="modal" href="#">Hủy bỏ</a>
+                <a style="background-color:red" href="@Url.Action("XacNhanXoaHD", new {id = @Model.ID })">Xóa!!</a>
+            </div>
+        </div>
+    </div>
+</div>

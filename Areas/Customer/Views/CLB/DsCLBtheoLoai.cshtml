@@ -1,0 +1,60 @@
+﻿@using PagedList.Mvc;
+@using PagedList;
+
+@{
+    ViewBag.Title = "Câu lạc bộ";
+    Layout = "~/Areas/Customer/Views/Shared/_Layout.cshtml";
+    var Dsclb = (IPagedList<ClubPortalMS.Models.CLB>)ViewBag.Dsclb;
+}
+
+<div class="page-banner bg-img bg-img-parallax overlay-dark" style="height:150px">
+    <div class="container h-100">
+        <div class="row justify-content-center align-items-center h-100">
+            <div class="col-lg-12">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb breadcrumb-dark bg-transparent justify-content-center py-0">
+                        <li class="breadcrumb-item"><a href="@Url.Action("Index","TrangChu")">Trang Chủ</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Câu lạc bộ</li>
+                    </ol>
+                </nav>
+                <h1 class="fg-white text-center">CÂU LẠC BỘ</h1>
+            </div>
+        </div>
+    </div>
+</div>
+
+<section id="shop">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="product-grid">
+                    <ul>
+                        @foreach (var item in Dsclb)
+                        {
+                            <li>
+                                <div class="products">
+                                    <a href="@Url.Action("ChiTietCLB","CLB", new {id = item.ID})">
+                                        <img src="@item.HinhCLB" style="width: 360px; height: 360px0" alt="">
+                                    </a>
+                                    <a href="@Url.Action("ChiTietCLB","CLB", new {id = item.ID})">
+                                        <h6>@item.TenCLB</h6>
+                                    </a>
+                                    <div>
+                                        <a class="view-link shutter" href="@Url.Action("ChiTietCLB","CLB", new {id = item.ID})">
+                                            Xem thêm
+                                        </a>
+                                    </div>
+                                </div>	<!-- End of /.products -->
+                            </li>
+                        }
+                    </ul>
+                </div>	<!-- End of /.products-grid -->
+
+            </div>	<!-- End of /.col-md-9 -->
+            @Html.PagedListPager(Dsclb, page => Url.Action("DsCLBtheoLoai", new { id = ViewBag.IDloaiclb, page }), new PagedListRenderOptions() { Display = PagedListDisplayMode.IfNeeded, DisplayPageCountAndCurrentLocation = true })
+        </div>	<!-- End of /.container -->
+    </div>	<!-- End of /.container -->
+</section>
+
+
+

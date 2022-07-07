@@ -1,0 +1,86 @@
+﻿@model IEnumerable<ClubPortalMS.ViewModel.Poster.PosterViewModel>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+<div class="content-wrapper ">
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class="m-0">Posters</h1>
+                </div><!-- /.col -->
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="#">Trang chủ</a></li>
+                        <li class="breadcrumb-item active">Posters</li>
+                    </ol>
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
+    </div>
+    <!-- Main content -->
+    <section class="content">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="row">
+                            <div class=" col-sm-9">
+                                <h3 class="card-title">Quản lý Posters</h3>
+                            </div>
+                            <div class=" col-sm-3">
+                                <a class="btn btn-info btn-block btn-flat" style="border-radius: 4px;" type="button" href="@Url.Action("Create")">
+                                    <i class="fa fa-plus-square" aria-hidden="true"></i> Thêm ảnh mới
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                            <div class="card-body">
+                                <table id="table1" class="table table-bordered table-striped">
+
+                                    <thead>
+                                        <tr>
+                                            <th>Hình ảnh</th>
+                                            <th>Trạng thái</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var item in Model)
+                                        {
+                                            <tr>
+                                                <td>
+                                                    <a href="@Url.Action("Details", new { id = item.ID })">
+                                                        <img src="@Url.Content(item.HinhAnh)" style="width: 1000px; height: 370px; margin: 10px;" />
+                                                    </a>
+                                                </td>
+
+                                                <td style="text-align: center;font-size:30px;color:#007BFF">
+                                                    @if (@item.Status == true)
+                                                    {
+                                                        <i class="fa fa-eye"  aria-hidden="true"></i>
+                                                    }
+                                                    else
+                                                    {
+                                                        <i class="fa fa-eye-slash" aria-hidden="true"></i>
+                                                    }
+                                                </td>
+
+                                            </tr>
+                                        }
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <th>Hình ảnh</th>
+                                            <th>Trạng thái</th>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+        </div>
+    </section>
+    <!-- /.content -->
+</div>
