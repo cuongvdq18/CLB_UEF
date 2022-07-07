@@ -1,0 +1,84 @@
+﻿@model ClubPortalMS.Models.UserLoginView
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_Layout_Login.cshtml";
+}
+
+
+    @using (Html.BeginForm(null, null, new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        <div class="login-box">
+            <!-- /.login-logo -->
+            <div class="card card-outline card-primary">
+                <div class="card-header text-center">
+                    <a href="#" class="h1">CLB_UEF</a>
+                </div>
+                <div class="card-body">
+                    <h4 class="login-box-msg"><b>Đăng nhập</b></h4>
+                    @if (ViewBag.Message != null)
+                    {
+                        <div class="alert alert-danger" >
+                            @ViewBag.Message
+                        </div>
+                    }
+                    <form action="../../index3.html" method="post">
+                        @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
+                        <div class="input-group mb-3">
+                            @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control", placeholder = "Tên tài khoản" } })
+                            <div class="input-group-append">
+                                <div class="input-group-text">
+                                    <span class="fas fa-envelope"></span>
+                                </div>
+                            </div>
+                        </div>
+                        @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                        <div class="input-group mb-3">
+                            @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control", placeholder = "Mật khẩu" } })
+                            <div class="input-group-append">
+                                <div class="input-group-text">
+                                    <span class="fas fa-lock"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="icheck-primary">
+
+                                    <div class="checkbox">
+                                        @Html.EditorFor(model => model.RememberMe)
+                                        @Html.ValidationMessageFor(model => model.RememberMe, "", new { @class = "text-danger" })
+                                        <label for="remember">
+                                            Tự động đăng nhập
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /.col -->
+                            <div class="col-6">
+
+                            </div>
+                            <!-- /.col -->
+                        </div>
+                    </form>
+
+                    <div class="social-auth-links text-center mt-2 mb-3">
+                        <button type="submit" class="btn btn-primary btn-block">Đăng Nhập</button>
+                        <a href="@Url.Action("SignIn", new { type = "Google" })" class="btn btn-block btn-danger">
+                            <i class="fab fa-google-plus mr-2"></i> Đăng nhập bằng Google
+                        </a>
+                    </div>
+                    <!-- /.social-auth-links -->
+
+                    <p class="mb-1">
+                        <a href="@Url.Action("ForgotPassWord")">Quên mật khẩu?</a>
+                    </p>
+                    <p class="mb-0">
+                        <a href="@Url.Action("Registration")" class="text-center">Bạn chưa có tài khoản?</a>
+                    </p>
+                </div>
+                <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+        </div> <!-- /.login-box -->
+    }

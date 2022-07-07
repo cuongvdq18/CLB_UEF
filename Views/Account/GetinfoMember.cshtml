@@ -1,0 +1,45 @@
+﻿@model ClubPortalMS.Models.GoogleLoginPlusViewModel
+
+    @{
+        Layout = "~/Views/Shared/_Layout_Login.cshtml";
+    }
+        @using (Html.BeginForm())
+        {
+        <div class="register-box">
+            <div class="card card-outline card-primary">
+                <div class="card-header text-center">
+                    <a href="#" class="h1">CLB_UEF</a>
+                </div>
+                <div class="card-body">
+                    <h4 class="login-box-msg">Đăng ký</h4>
+
+                    <form method="post">
+                        @Html.ValidationMessageFor(model => model.MSSV, "", new { @class = "text-danger" })
+                        <div class="input-group mb-3">
+                            @Html.EditorFor(model => model.MSSV, new { htmlAttributes = new { @class = "form-control", placeholder = "Mã số sinh viên" } })
+                            <div class="input-group-append">
+                                <div class="input-group-text">
+                                    <span class="fas fa-user"></span>
+                                </div>
+                            </div>
+                        </div>
+                        @Html.ValidationMessageFor(model => model.IdKhoa, "", new { @class = "text-danger" })
+                    <div class="input-group mb-3">
+                        @Html.DropDownList("IdKhoa", null, htmlAttributes: new { @class = "form-control" })
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-address-book"></span>
+                            </div>
+                        </div>
+                    </div>
+                        <div class="row">
+                            <div class="col-4">
+                                <button type="submit" class="btn btn-primary btn-block">Đăng ký</button>
+                            </div>
+                            <!-- /.col -->
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        }

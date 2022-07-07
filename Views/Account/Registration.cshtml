@@ -1,0 +1,127 @@
+﻿@model ClubPortalMS.Models.UserRegisterView
+@{
+    Layout = "~/Views/Shared/_Layout_Login.cshtml";
+}
+
+
+@if (ViewBag.Status != null && Convert.ToBoolean(ViewBag.Status))
+{
+    if (ViewBag.Message != null)
+    {
+        <div class="register-box">
+          
+                <div class="alert alert-success">
+                    <strong>Thành công!</strong> @ViewBag.Message
+                    <p>Và <a href="@Url.Action("Login")" class="text-center">Đăng nhập</a> </p>
+                </div>
+        </div>
+    }
+    }
+    else
+    {
+    using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="register-box">
+            <div class="card card-outline card-primary">
+                <div class="card-header text-center">
+                    <a href="#" class="h1">CLB_UEF</a>
+                </div>
+                <div class="card-body">
+                    <h4 class="login-box-msg">Đăng ký</h4>
+
+                    <form method="post">
+                        @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
+                        <div class="input-group mb-3">
+                            @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control", placeholder = "Tên tài khoản" } })
+                            <div class="input-group-append">
+                                <div class="input-group-text">
+                                    <span class="fas fa-user"></span>
+                                </div>
+                            </div>
+                        </div>
+                        @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
+                        <div class="input-group mb-3">
+                            @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control", placeholder = "Tên" } })
+                            <div class="input-group-append">
+                                <div class="input-group-text">
+                                    <span class="fas fa-address-book"></span>
+                                </div>
+                            </div>
+                        </div>
+                        @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
+                        <div class="input-group mb-3">
+                            @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control", placeholder = "Họ và Tên đệm" } })
+                            <div class="input-group-append">
+                                <div class="input-group-text">
+                                    <span class="fas fa-address-book"></span>
+                                </div>
+                            </div>
+                        </div>
+                        @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                        @Html.ValidationMessage("ErrorEmail", new { @class = "text-danger" })
+                        <div class="input-group mb-3">
+                            @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", placeholder = "Email" } })
+                            <div class="input-group-append">
+                                <div class="input-group-text">
+                                    <span class="fas fa-envelope"></span>
+                                </div>
+                            </div>
+                        </div>
+                        @Html.ValidationMessageFor(model => model.MSSV, "", new { @class = "text-danger" })
+                        @Html.ValidationMessage("Lỗi Email", new { @class = "text-danger" })
+                        <div class="input-group mb-3">
+                            @Html.EditorFor(model => model.MSSV, new { htmlAttributes = new { @class = "form-control", placeholder = "Mã số sinh viên" } })
+                            <div class="input-group-append">
+                                <div class="input-group-text">
+                                    <span class="fas fa-envelope"></span>
+                                </div>
+                            </div>
+                        </div>
+                        @Html.ValidationMessageFor(model => model.IdKhoa, "", new { @class = "text-danger" })
+                        <div class="input-group mb-3">
+                            @Html.DropDownList("IdKhoa", ViewBag.IdKhoa as SelectList, "Chọn khoa", htmlAttributes: new { @class = "form-control" })
+                        </div>
+                        @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                        <div class="input-group mb-3">
+                            @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control", placeholder = "Mật khẩu" } })
+                            <div class="input-group-append">
+                                <div class="input-group-text">
+                                    <span class="fas fa-lock"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "text-danger" })
+                        <div class="input-group mb-3">
+                            @Html.EditorFor(model => model.ConfirmPassword, new { htmlAttributes = new { @class = "form-control", placeholder = "Xác nhận mật khẩu" } })
+                            <div class="input-group-append">
+                                <div class="input-group-text">
+                                    <span class="fas fa-lock"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-8">
+                                <a href="@Url.Action("Login")" class="text-center">Bạn đã có tài khoản?</a>
+                            </div>
+                            <!-- /.col -->
+                            <div class="col-4">
+                                <button type="submit" class="btn btn-primary btn-block">Đăng ký</button>
+                            </div>
+                            <!-- /.col -->
+                        </div>
+                    </form>
+
+                  
+                </div>
+                <!-- /.form-box -->
+            </div><!-- /.card -->
+        </div>
+
+
+
+    }
+}
+
